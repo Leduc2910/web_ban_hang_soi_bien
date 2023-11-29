@@ -1,7 +1,4 @@
 package service.IService;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-
 import java.util.List;
 
 public interface IProductService<E> {
