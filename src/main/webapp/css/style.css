@@ -1,0 +1,105 @@
+.container-fix {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row-fix {
+    margin: 50px 50px;
+}
+
+.header {
+    background-color: #f8f6f8;
+    height: 75px;
+    width: 100%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.main {
+    width: 100%;
+    height: 854px;
+    display: flex;
+    position: relative;
+}
+
+.leftbar {
+    width: 20%;
+    height: 100%;
+    background-color: #f8f6f8;
+    box-shadow: 2px 0 4px rgb(0, 0, 0, 0.1);
+}
+
+.function-search {
+    height: 70px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.function {
+    width: 100%;
+}
+
+.function .item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+
+.function .item a:hover {
+    background-color: #d5d4d4;
+}
+
+.function .item a {
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    padding: 5px 10px 5px 20px;
+    line-height: 60px;
+    color: #595151;
+    align-items: center;
+    font-weight: bold;
+}
+
+.item i {
+    margin-right: 10px;
+}
+
+.item .sub-item {
+    display: none;
+}
+
+.item .sub-menu a {
+    padding-left: 50px;
+    font-size: 17px;
+    font-weight: normal;
+}
+
+.rotate {
+    transform: rotate(270deg);
+}
+
+.content {
+    width: 80%;
+    height: 100%;
+}
+
+.table th {
+    text-align: center;
+}
+
+.table th, td {
+    border: 1px solid #abaaaa;
+}
+.table tr:hover {
+    background-color: #f8f6f8;
+}
