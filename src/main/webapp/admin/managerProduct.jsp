@@ -89,20 +89,20 @@
                             <th scope="col">Category</th>
                             <th scope="col" colspan="3">Action</th>
                         </tr>
-                        <c:forEach var="product" items="${list}">
+                        <c:forEach var="product" items="${listProduct}">
                             <tr>
                                 <th scope="row">${product.id}</th>
                                 <td>${product.name}</td>
-                                <td>${product.name}</td>
-                                <td>${product.name}</td>
-                                <td>${product.name}</td>
+                                <td>${product.brand}</td>
+                                <td>${product.price}</td>
+                                <td>${product.category.name}</td>
                                 <td style="text-align: center"><a href="/admin?action=edit&id=${product.id}"
                                                                   class="btn btn-outline-warning">Edit</a>
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=delete&${product.id}}"
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
-                                <td style="text-align: center"><a href="/admin?action=delete&${product.id}}"
+                                <td style="text-align: center"><a href="/admin?action=detail&${product.id}}"
                                                                   class="btn btn-outline-danger">Detail</a>
                                 </td>
                             </tr>

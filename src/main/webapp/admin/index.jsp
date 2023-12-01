@@ -52,14 +52,14 @@
                 </a>
                     <div class="sub-menu">
                         <a href="admin?action=managerCategory" class="sub-item">List category</a>
-                        <a href="#" class="sub-item">Add category</a>
+                        <a href="/admin?action=addCategory" class="sub-item">Add category</a>
                     </div>
                 </div>
                 <div class="item"><a class="sub-btn"><i class="fa-solid fa-cube"></i>Product<i
                         class="fa-solid fa-angle-left dropdown" style="margin-left: 230px"></i></a>
                     <div class="sub-menu">
-                        <a href="#" class="sub-item">List product</a>
-                        <a href="#" class="sub-item">Add product</a>
+                        <a href="/admin?action=managerProduct" class="sub-item">List product</a>
+                        <a href="/admin?action=addProduct" class="sub-item">Add product</a>
                     </div>
                 </div>
                 <div class="item"><a href="#"><i class="fa-solid fa-user-group"></i>Account</a>
