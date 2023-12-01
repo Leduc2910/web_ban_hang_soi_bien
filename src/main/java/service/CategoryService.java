@@ -72,7 +72,6 @@ public class CategoryService implements ICategoryService<Category> {
                 Category category = new Category(id, name);
                 categoryList.add(category);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

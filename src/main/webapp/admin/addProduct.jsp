@@ -69,47 +69,53 @@
         <div class="content">
             <div class="row row-fix">
                 <div class="col-12">
-                    <h1><span style="font-weight: normal; font-size: smaller">Add</span> Category</h1>
+                    <h1><span style="font-weight: normal; font-size: smaller">Add</span> Product</h1>
                     <hr>
                 </div>
                 <div class="col-12 mt-3">
-                    <form>
+                    <form action="/admin?action=addProduct" method="post">
                         <div class="form-row">
-                            <div class="form-group col-md-7">
+                            <div class="form-group col-md-5">
                                 <label for="inputName">Name</label>
                                 <input type="text" class="form-control" id="inputName" name="name">
                             </div>
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-3">
                                 <label for="inputBrand">Brand</label>
                                 <input type="text" class="form-control" id="inputBrand" name="brand">
                             </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputCategory">Category</label>
+                                <select id="inputCategory" class="form-control" name="idCategory">
+                                    <option selected>Choose...</option>
+                                    <c:forEach var="category" items="${listCategory}">
+                                        <option value="${category.id}">${category.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="inputUnit">Unit</label>
+                                <input type="text" class="form-control" id="inputUnit" name="unit">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputWeight">Weight</label>
+                                <input type="number" id="inputWeight" class="form-control" name="weight">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPrice">Price</label>
+                                <input type="number" class="form-control" id="inputPrice" name="price">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Description</label>
                             <input type="text" class="form-control" id="inputDescription" name="description">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
+                        <div class="form-group">
+                            <label for="inputImage">Image</label>
+                            <input type="text" class="form-control" id="inputImage" name="image">
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Category;
 import model.Product;
 import service.CategoryService;
 import service.ProductService;
@@ -35,10 +36,20 @@ public class ManagerController extends HttpServlet {
             case "addProduct":
                 showFormAddProduct(req, resp);
                 break;
+            case "addCategory":
+                showFormAddCategory(req, resp);
+                break;
         }
     }
 
+    private void showFormAddCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/addCategory.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
     private void showFormAddProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        req.setAttribute("listCategory", categories);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/addProduct.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -51,6 +62,8 @@ public class ManagerController extends HttpServlet {
     }
 
     private void showAllCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        req.setAttribute("listCategory", categories);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/managerCategory.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -63,6 +76,37 @@ public class ManagerController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        switch (action) {
+            case "home":
+                showMenuManager(req, resp);
+                break;
+            case "addProduct":
+                addProduct(req, resp);
+                break;
+            case "addCategory":
+                addCategory(req, resp);
+                break;
+        }
 
+    }
+
+    private void addCategory(HttpServletRequest req, HttpServletResponse resp) {
+
+    }
+
+    private void addProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+        String brand = req.getParameter("brand");
+        String unit = req.getParameter("unit");
+        double weight = Double.parseDouble(req.getParameter("weight"));
+        int price = Integer.parseInt(req.getParameter("price"));
+        String description = req.getParameter("description");
+        String image = req.getParameter("image");
+        int idCategory = Integer.parseInt(req.getParameter("idCategory"));
+        Category category = new Category(idCategory);
+        Product product = new Product(name, brand, unit, weight, price, description, image, category);
+        productService.add(product);
+        resp.sendRedirect("/admin?action=managerProduct");
     }
 }
