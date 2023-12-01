@@ -75,23 +75,22 @@
                 <div class="col-12 mt-3">
                     <form>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                            <div class="form-group col-md-7">
+                                <label for="inputName">Name</label>
+                                <input type="text" class="form-control" id="inputName" name="name">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                            <div class="form-group col-md-5">
+                                <label for="inputBrand">Brand</label>
+                                <input type="text" class="form-control" id="inputBrand" name="brand">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                            <input type="text" class="form-control" id="inputAddress">
                         </div>
                         <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2"
-                                   placeholder="Apartment, studio, or floor">
+                            <label for="inputDescription">Description</label>
+                            <input type="text" class="form-control" id="inputDescription" name="description">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -108,14 +107,6 @@
                             <div class="form-group col-md-2">
                                 <label for="inputZip">Zip</label>
                                 <input type="text" class="form-control" id="inputZip">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type=ư"checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Check me out
-                                </label>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Sign in</button>

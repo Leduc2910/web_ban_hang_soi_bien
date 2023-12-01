@@ -32,7 +32,15 @@ public class ManagerController extends HttpServlet {
             case "managerProduct":
                 showAllProduct(req, resp);
                 break;
+            case "addProduct":
+                showFormAddProduct(req, resp);
+                break;
         }
+    }
+
+    private void showFormAddProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/addProduct.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     private void showAllProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

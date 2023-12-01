@@ -103,7 +103,7 @@
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=detail&${product.id}}"
-                                                                  class="btn btn-outline-danger">Detail</a>
+                                                                  class="btn btn-primary">Detail</a>
                                 </td>
                             </tr>
                         </c:forEach>
