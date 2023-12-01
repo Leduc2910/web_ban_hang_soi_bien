@@ -23,6 +23,17 @@ public class Product {
         this.category = category;
     }
 
+    public Product(String name, String brand, String unit, double weight, int price, String description, String image, Category category) {
+        this.name = name;
+        this.brand = brand;
+        this.unit = unit;
+        this.weight = weight;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }

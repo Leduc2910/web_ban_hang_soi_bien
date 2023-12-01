@@ -36,11 +36,34 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public void edit(int id, Product product) {
-
+    String sql = "update  product set name = ?, brand = ?, unit = ?, weight = ?, price = ?, description = ?, image = ?, idCategory = ? where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(9, id);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getBrand());
+            preparedStatement.setString(3, product.getUnit());
+            preparedStatement.setDouble(4, product.getWeight());
+            preparedStatement.setInt(5, product.getPrice());
+            preparedStatement.setString(6, product.getDescription());
+            preparedStatement.setString(7, product.getImage());
+            preparedStatement.setInt(8, product.getCategory().getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(int id) {
+    String sql = "delete from product where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
