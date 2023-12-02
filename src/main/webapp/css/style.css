@@ -103,3 +103,11 @@
 .table tr:hover {
     background-color: #f8f6f8;
 }
+.detail-container {
+    font-size: 18px;
+}
+
+.detail-container label {
+    font-weight: bold;
+    margin-bottom: 20px;
+}

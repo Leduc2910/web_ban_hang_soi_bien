@@ -47,13 +47,8 @@
             <div class="function">
                 <div class="item"><a href="/admin?action=home"><i class="fa-solid fa-house"></i>Home</a>
                 </div>
-                <div class="item"><a class="sub-btn"><i class="fa-solid fa-list"></i>Category<i
-                        class="fa-solid fa-angle-left dropdown" style="margin-left: 220px"></i>
+                <div class="item"><a href="/admin?action=managerCategory"><i class="fa-solid fa-list"></i>Category
                 </a>
-                    <div class="sub-menu">
-                        <a href="/admin?action=managerCategory" class="sub-item">List category</a>
-                        <a href="/admin?action=addCategory" class="sub-item">Add category</a>
-                    </div>
                 </div>
                 <div class="item"><a class="sub-btn"><i class="fa-solid fa-cube"></i>Product<i
                         class="fa-solid fa-angle-left dropdown" style="margin-left: 230px"></i></a>
@@ -109,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Description</label>
-                            <input type="text" class="form-control" id="inputDescription" name="description">
+                            <textarea class="form-control" id="inputDescription" name="description" style="height:330px; resize: none"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="inputImage">Image</label>

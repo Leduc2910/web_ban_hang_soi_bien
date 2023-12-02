@@ -30,3 +30,5 @@ $(document).ready(function () {
         e.stopPropagation();
     });
 });
+
+/*modal show*/

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mihdu
-  Date: 30/11/2023
-  Time: 7:32 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -71,29 +64,70 @@
         <div class="content">
             <div class="row row-fix">
                 <div class="col-12">
-                    <h1><span style="font-weight: normal; font-size: smaller">List</span> Category</h1>
+                    <h1><span style="font-weight: normal; font-size: smaller">Edit</span> Product</h1>
                     <hr>
                 </div>
                 <div class="col-12 mt-3">
-                    <table class="table">
-                        <tr class="navbar-light" style="background-color: #f8f6f8">
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col" colspan="2">Action</th>
-                        </tr>
-                        <c:forEach var="category" items="${listCategory}">
-                            <tr>
-                                <th scope="row">${category.id}</th>
-                                <td>${category.name}</td>
-                                <td style="text-align: center"><a href="/admin?action=editCategory&id=${category.id}"
-                                                                  class="btn btn-outline-warning">Edit</a>
-                                </td>
-                                <td style="text-align: center"><a href="/admin?action=deleteCategory&id=${category.id}}"
-                                                                  class="btn btn-outline-danger">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                    <form action="/admin?action=editProduct&id=${product.id}" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="inputName">Name</label>
+                                <input type="text" class="form-control" id="inputName" name="name"
+                                       value="${product.name}">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputBrand">Brand</label>
+                                <input type="text" class="form-control" id="inputBrand" name="brand"
+                                       value="${product.brand}">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputCategory">Category</label>
+                                <select id="inputCategory" class="form-control" name="idCategory">
+                                    <c:forEach var="category" items="${listCategory}">
+                                        <c:choose>
+                                            <c:when test="${category.id == product.category.id}">
+                                                <option value="${category.id}" selected>${category.name}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${category.id}">${category.name}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="inputUnit">Unit</label>
+                                <input type="text" class="form-control" id="inputUnit" name="unit"
+                                       value="${product.unit}">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputWeight">Weight</label>
+                                <input type="number" id="inputWeight" class="form-control" name="weight"
+                                       value="${product.weight}">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputPrice">Price</label>
+                                <input type="number" class="form-control" id="inputPrice" name="price"
+                                       value="${product.price}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Description</label>
+                            <textarea class="form-control" id="inputDescription"
+                                      name="description">${product.description}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputImage">Image</label>
+                            <input type="text" class="form-control" id="inputImage" name="image"
+                                   value="${product.image}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="/admin?action=managerProduct" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

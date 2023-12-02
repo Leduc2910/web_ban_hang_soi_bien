@@ -70,7 +70,7 @@ public class ProductService implements IProductService<Product> {
     @Override
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
-        String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory;";
+        String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory order by product.id;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

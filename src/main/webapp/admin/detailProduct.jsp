@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mihdu
-  Date: 30/11/2023
-  Time: 7:32 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -71,29 +64,71 @@
         <div class="content">
             <div class="row row-fix">
                 <div class="col-12">
-                    <h1><span style="font-weight: normal; font-size: smaller">List</span> Category</h1>
+                    <h1><span style="font-weight: normal; font-size: smaller">Edit</span> Product</h1>
                     <hr>
                 </div>
                 <div class="col-12 mt-3">
-                    <table class="table">
-                        <tr class="navbar-light" style="background-color: #f8f6f8">
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col" colspan="2">Action</th>
-                        </tr>
-                        <c:forEach var="category" items="${listCategory}">
-                            <tr>
-                                <th scope="row">${category.id}</th>
-                                <td>${category.name}</td>
-                                <td style="text-align: center"><a href="/admin?action=editCategory&id=${category.id}"
-                                                                  class="btn btn-outline-warning">Edit</a>
-                                </td>
-                                <td style="text-align: center"><a href="/admin?action=deleteCategory&id=${category.id}}"
-                                                                  class="btn btn-outline-danger">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="${product.image}"
+                                 class="img-fluid" alt="">
+                        </div>
+                        <div class="col-sm-8 detail-container" style="overflow: auto; max-height: 640px">
+                            <div class="row">
+                                <label class="col-sm-3">
+                                    ID:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.id}
+                                </div>
+                                <label class="col-sm-3">
+                                    Name:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.name}
+                                </div>
+                                <label class="col-sm-3">
+                                    Brand:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.brand}
+                                </div>
+                                <label class="col-sm-3">
+                                    Category:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.category.name}
+                                </div>
+                                <label class="col-sm-3">
+                                    Unit:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.unit}
+                                </div>
+                                <label class="col-sm-3">
+                                    Weight:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.weight}
+                                </div>
+                                <label class="col-sm-3">
+                                    Price:
+                                </label>
+                                <div class="col-sm-9">
+                                    ${product.price}
+                                </div>
+                                <label class="col-sm-3">
+                                    Description:
+                                </label>
+                                <div class="col-sm-9" st>
+                                    ${product.description}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="/admin?action=managerProduct" class="btn btn-secondary">Back to list</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -54,13 +54,8 @@
             <div class="function">
                 <div class="item"><a href="/admin?action=home"><i class="fa-solid fa-house"></i>Home</a>
                 </div>
-                <div class="item"><a class="sub-btn"><i class="fa-solid fa-list"></i>Category<i
-                        class="fa-solid fa-angle-left dropdown" style="margin-left: 220px"></i>
+                <div class="item"><a href="/admin?action=managerCategory"><i class="fa-solid fa-list"></i>Category
                 </a>
-                    <div class="sub-menu">
-                        <a href="/admin?action=managerCategory" class="sub-item">List category</a>
-                        <a href="/admin?action=addCategory" class="sub-item">Add category</a>
-                    </div>
                 </div>
                 <div class="item"><a class="sub-btn"><i class="fa-solid fa-cube"></i>Product<i
                         class="fa-solid fa-angle-left dropdown" style="margin-left: 230px"></i></a>
@@ -96,13 +91,13 @@
                                 <td>${product.brand}</td>
                                 <td>${product.price}</td>
                                 <td>${product.category.name}</td>
-                                <td style="text-align: center"><a href="/admin?action=edit&id=${product.id}"
-                                                                  class="btn btn-outline-warning">Edit</a>
+                                <td style="text-align: center">
+                                    <a href="/admin?action=editProduct&id=${product.id}" class="btn btn-outline-warning">Edit</a>
                                 </td>
-                                <td style="text-align: center"><a href="/admin?action=delete&${product.id}}"
+                                <td style="text-align: center"><a href="/admin?action=deleteProduct&id=${product.id}"
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
-                                <td style="text-align: center"><a href="/admin?action=detail&${product.id}}"
+                                <td style="text-align: center"><a href="/admin?action=detailProduct&id=${product.id}"
                                                                   class="btn btn-primary">Detail</a>
                                 </td>
                             </tr>

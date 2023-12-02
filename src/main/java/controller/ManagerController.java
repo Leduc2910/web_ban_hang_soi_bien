@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ManagerController", value = "/admin")
@@ -39,7 +38,60 @@ public class ManagerController extends HttpServlet {
             case "addCategory":
                 showFormAddCategory(req, resp);
                 break;
+            case "editProduct":
+                showFormEditProduct(req, resp);
+                break;
+            case "editCategory":
+                showFormEditCategory(req, resp);
+                break;
+            case "detailProduct":
+                showFormDetailProduct(req, resp);
+                break;
+            case "deleteProduct":
+                deleteProduct(req, resp);
+                break;
+            case "deleteCategory":
+                deleteCategory(req, resp);
+                break;
         }
+    }
+
+    private void deleteCategory(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        productService.delete(id);
+        resp.sendRedirect("/admin?action=managerProduct");
+    }
+
+    private void showFormDetailProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Product p :
+                productService.findAll()) {
+            if (p.getId() == id) {
+                req.setAttribute("product", p);
+            }
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/detailProduct.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
+    private void showFormEditCategory(HttpServletRequest req, HttpServletResponse resp) {
+    }
+
+    private void showFormEditProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Product p :
+                productService.findAll()) {
+            if (p.getId() == id) {
+                req.setAttribute("product", p);
+            }
+        }
+        List<Category> categories = categoryService.findAll();
+        req.setAttribute("listCategory", categories);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editProduct.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     private void showFormAddCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -87,7 +139,33 @@ public class ManagerController extends HttpServlet {
             case "addCategory":
                 addCategory(req, resp);
                 break;
+            case "editCategory":
+                editCategory(req, resp);
+                break;
+            case "editProduct":
+                editProduct(req, resp);
+                break;
         }
+
+    }
+
+    private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String brand = req.getParameter("brand");
+        String unit = req.getParameter("unit");
+        double weight = Double.parseDouble(req.getParameter("weight"));
+        int price = Integer.parseInt(req.getParameter("price"));
+        String description = req.getParameter("description");
+        String image = req.getParameter("image");
+        int idCategory = Integer.parseInt(req.getParameter("idCategory"));
+        Category category = new Category(idCategory);
+        Product product = new Product(name, brand, unit, weight, price, description, image, category);
+        productService.edit(id, product);
+        resp.sendRedirect("/admin?action=managerProduct");
+    }
+
+    private void editCategory(HttpServletRequest req, HttpServletResponse resp) {
 
     }
 
