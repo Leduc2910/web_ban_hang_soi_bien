@@ -74,6 +74,10 @@
                     <h1><span style="font-weight: normal; font-size: smaller">List</span> Product</h1>
                     <hr>
                 </div>
+                <div class="col-12">
+                    <a href="/admin?action=addProduct" class="btn btn-info">Create new product
+                    </a>
+                </div>
                 <div class="col-12 mt-3">
                     <table class="table">
                         <tr class="navbar-light" style="background-color: #f8f6f8">
@@ -92,13 +96,14 @@
                                 <td>${product.price}</td>
                                 <td>${product.category.name}</td>
                                 <td style="text-align: center">
-                                    <a href="/admin?action=editProduct&id=${product.id}" class="btn btn-outline-warning">Edit</a>
+                                    <a href="/admin?action=editProduct&id=${product.id}"
+                                       class="btn btn-outline-warning">Edit</a>
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=deleteProduct&id=${product.id}"
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=detailProduct&id=${product.id}"
-                                                                  class="btn btn-primary">Detail</a>
+                                                                  class="btn btn-outline-primary">Detail</a>
                                 </td>
                             </tr>
                         </c:forEach>
