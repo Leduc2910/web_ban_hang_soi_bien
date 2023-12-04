@@ -64,8 +64,7 @@ public class ManagerController extends HttpServlet {
 
     private void showFormDetailProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        for (Product p :
-                productService.findAll()) {
+        for (Product p : productService.findAll()) {
             if (p.getId() == id) {
                 req.setAttribute("product", p);
             }
@@ -74,8 +73,20 @@ public class ManagerController extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
-    private void showFormEditCategory(HttpServletRequest req, HttpServletResponse resp) {
+    private void showFormEditCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        List<Category> categoryList = categoryService.findAll();
+        for (Category category: categoryList) {
+            if (category.getId() == id) {
+                req.setAttribute("category", category);
+            }
+
+
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editCategory.jsp");
+        requestDispatcher.forward(req,resp);
     }
+
 
     private void showFormEditProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -156,11 +167,18 @@ public class ManagerController extends HttpServlet {
         resp.sendRedirect("/admin?action=managerProduct");
     }
 
-    private void editCategory(HttpServletRequest req, HttpServletResponse resp) {
+    private void editCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        Category category = new Category(id, name);
+        categoryService.edit(id,category);
+        resp.sendRedirect("/admin?action=managerCategory");
+
 
     }
 
     private void addCategory(HttpServletRequest req, HttpServletResponse resp) {
+
 
     }
 
