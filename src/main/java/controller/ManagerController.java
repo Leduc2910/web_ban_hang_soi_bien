@@ -53,7 +53,11 @@ public class ManagerController extends HttpServlet {
         }
     }
 
-    private void deleteCategory(HttpServletRequest req, HttpServletResponse resp) {
+    private void deleteCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        categoryService.delete(id);
+        resp.sendRedirect("/admin?action=managerCategory");
+
     }
 
     private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -177,9 +181,11 @@ public class ManagerController extends HttpServlet {
 
     }
 
-    private void addCategory(HttpServletRequest req, HttpServletResponse resp) {
-
-
+    private void addCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+        Category category = new Category(name);
+        categoryService.add(category);
+        resp.sendRedirect("/admin?action=managerCategory");
     }
 
     private void addProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {

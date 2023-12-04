@@ -92,7 +92,7 @@
                                 <td style="text-align: center"><a href="/admin?action=editCategory&id=${category.id}"
                                                                   class="btn btn-outline-warning">Edit</a>
                                 </td>
-                                <td style="text-align: center"><a href="/admin?action=deleteCategory&id=${category.id}}"
+                                <td style="text-align: center"><a href="/admin?action=deleteCategory&id=${category.id}"
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
                             </tr>
@@ -119,7 +119,7 @@
                         <input type="text" class="form-control" id="inputCategory" name="name">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
