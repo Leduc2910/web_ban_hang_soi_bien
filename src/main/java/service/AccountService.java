@@ -12,10 +12,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class AccountService implements IAccountService<Account> {
-    Connection connection =  ConnectToMySQL.getConnection();
+    Connection connection = ConnectToMySQL.getConnection();
+
     @Override
     public void checkAccount(Account account) {
-
     }
 
     @Override
@@ -27,7 +27,7 @@ public class AccountService implements IAccountService<Account> {
             preparedStatement.setString(2, account.getPassword());
             preparedStatement.setInt(3, account.getRole());
             preparedStatement.setString(4, account.getFullName());
-            preparedStatement.setInt(5, account.getId());
+            preparedStatement.setInt(5, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -40,7 +40,7 @@ public class AccountService implements IAccountService<Account> {
         String sql = "delete from user where id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -50,12 +50,12 @@ public class AccountService implements IAccountService<Account> {
 
     @Override
     public List<Account> findAll() {
-String sql = "select * from user;";
-List<Account> accountList = new ArrayList<>();
+        String sql = "select * from user;";
+        List<Account> accountList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String passWord = resultSet.getString("passWord");
