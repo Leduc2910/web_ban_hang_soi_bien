@@ -35,9 +35,6 @@ public class ManagerController extends HttpServlet {
             case "addProduct":
                 showFormAddProduct(req, resp);
                 break;
-            case "addCategory":
-                showFormAddCategory(req, resp);
-                break;
             case "editProduct":
                 showFormEditProduct(req, resp);
                 break;
@@ -93,12 +90,6 @@ public class ManagerController extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editProduct.jsp");
         requestDispatcher.forward(req, resp);
     }
-
-    private void showFormAddCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/addCategory.jsp");
-        requestDispatcher.forward(req, resp);
-    }
-
     private void showFormAddProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Category> categories = categoryService.findAll();
         req.setAttribute("listCategory", categories);

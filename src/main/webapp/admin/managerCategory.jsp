@@ -74,6 +74,10 @@
                     <h1><span style="font-weight: normal; font-size: smaller">List</span> Category</h1>
                     <hr>
                 </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Create new category
+                    </button>
+                </div>
                 <div class="col-12 mt-3">
                     <table class="table">
                         <tr class="navbar-light" style="background-color: #f8f6f8">
@@ -96,6 +100,29 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin?action=addCategory" method="post">
+                    <div class="form-group">
+                        <label for="inputCategory" class="col-form-label">Name: </label>
+                        <input type="text" class="form-control" id="inputCategory" name="name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
         </div>
     </div>
 </div>
