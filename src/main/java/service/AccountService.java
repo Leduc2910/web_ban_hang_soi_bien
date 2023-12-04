@@ -6,9 +6,9 @@ import service.IService.IAccountService;
 import java.util.List;
 
 public class AccountService implements IAccountService<Account> {
+
     @Override
     public void checkAccount(Account account) {
-
     }
 
     @Override
