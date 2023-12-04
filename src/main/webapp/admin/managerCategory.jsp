@@ -75,7 +75,8 @@
                     <hr>
                 </div>
                 <div class="col-12">
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Create new category
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Create
+                        new category
                     </button>
                 </div>
                 <div class="col-12 mt-3">
