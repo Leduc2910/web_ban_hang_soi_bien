@@ -16,6 +16,7 @@
     <input type="text" name="phoneNumber" placeholder="Phone Number">
     <input type="password" name="password" placeholder="Password">
     <button type="submit">Đăng nhập</button>
+    <a href="/account?action=register">Đăng kí</a>
 </form>
 </body>
 </html>

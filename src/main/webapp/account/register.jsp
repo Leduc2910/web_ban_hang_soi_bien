@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-
+<form action="/account?action=register" method="post">
+    <input type="text" name="fullName" placeholder="Full Name">
+    <input type="text" name="phoneNumber" placeholder="Phone Number">
+    <input type="text" name="password" placeholder="Password">
+    <button type="submit">Đăng ký</button>
+</form>
 </body>
 </html>

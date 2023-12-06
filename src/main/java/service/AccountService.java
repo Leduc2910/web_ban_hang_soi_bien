@@ -32,6 +32,21 @@ public class AccountService implements IAccountService<Account> {
     }
 
     @Override
+    public void add(Account account) {
+        List<Account> accounts = findAll();
+        String sql = "insert into user(phoneNumber, password, fullName) values (?,?,?);";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, account.getPhoneNumber());
+            preparedStatement.setString(2, account.getPassword());
+            preparedStatement.setString(3, account.getFullName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void edit(int id, Account account) {
         String sql = "update user set phoneNumber = ?, password = ?, role = ?, fullName = ? where id = ?;";
         try {

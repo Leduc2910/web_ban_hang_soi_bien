@@ -25,47 +25,51 @@ public class ManagerController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        switch (action) {
-            case "home":
-                showMenuManager(req, resp);
-                break;
-            case "managerCategory":
-                showAllCategory(req, resp);
-                break;
-            case "managerProduct":
-                showAllProduct(req, resp);
-                break;
-            case "managerAccount":
-                showAllAccount(req, resp);
-                break;
-            case "addProduct":
-                showFormAddProduct(req, resp);
-                break;
-            case "editProduct":
-                showFormEditProduct(req, resp);
-                break;
-            case "editCategory":
-                showFormEditCategory(req, resp);
-                break;
-            case "editAccount":
-                showFormEdit(req, resp);
-                break;
-            case "detailProduct":
-                showFormDetailProduct(req, resp);
-                break;
-            case "detailAccount":
-                showFormDetailAccount(req, resp);
-                break;
-            case "deleteProduct":
-                deleteProduct(req, resp);
-                break;
-            case "deleteCategory":
-                deleteCategory(req, resp);
-                break;
-            case "deleteAccount":
-                deleteAccount(req, resp);
-                break;
+        if (SessionUser.checkUser(req)) {
+            String action = req.getParameter("action");
+            switch (action) {
+                case "home":
+                    showMenuManager(req, resp);
+                    break;
+                case "managerCategory":
+                    showAllCategory(req, resp);
+                    break;
+                case "managerProduct":
+                    showAllProduct(req, resp);
+                    break;
+                case "managerAccount":
+                    showAllAccount(req, resp);
+                    break;
+                case "addProduct":
+                    showFormAddProduct(req, resp);
+                    break;
+                case "editProduct":
+                    showFormEditProduct(req, resp);
+                    break;
+                case "editCategory":
+                    showFormEditCategory(req, resp);
+                    break;
+                case "editAccount":
+                    showFormEdit(req, resp);
+                    break;
+                case "detailProduct":
+                    showFormDetailProduct(req, resp);
+                    break;
+                case "detailAccount":
+                    showFormDetailAccount(req, resp);
+                    break;
+                case "deleteProduct":
+                    deleteProduct(req, resp);
+                    break;
+                case "deleteCategory":
+                    deleteCategory(req, resp);
+                    break;
+                case "deleteAccount":
+                    deleteAccount(req, resp);
+                    break;
+            }
+        } else {
+            resp.sendRedirect("/account?action=login");
         }
     }
 
@@ -176,25 +180,28 @@ public class ManagerController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        switch (action) {
-            case "home":
-                showMenuManager(req, resp);
-                break;
-            case "addProduct":
-                addProduct(req, resp);
-                break;
-            case "addCategory":
-                addCategory(req, resp);
-                break;
-            case "editCategory":
-                editCategory(req, resp);
-                break;
-            case "editProduct":
-                editProduct(req, resp);
-                break;
+        if (SessionUser.checkUser(req)) {
+            String action = req.getParameter("action");
+            switch (action) {
+                case "home":
+                    showMenuManager(req, resp);
+                    break;
+                case "addProduct":
+                    addProduct(req, resp);
+                    break;
+                case "addCategory":
+                    addCategory(req, resp);
+                    break;
+                case "editCategory":
+                    editCategory(req, resp);
+                    break;
+                case "editProduct":
+                    editProduct(req, resp);
+                    break;
+            }
+        } else {
+            resp.sendRedirect("/account?action=login");
         }
-
     }
 
     private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {

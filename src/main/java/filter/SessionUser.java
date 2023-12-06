@@ -7,7 +7,7 @@ public class SessionUser {
     public static boolean checkUser(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            if (session.getAttribute("idAccount") != null) {
+            if ((int) session.getAttribute("role") == 1) {
                 return true;
             }
         }

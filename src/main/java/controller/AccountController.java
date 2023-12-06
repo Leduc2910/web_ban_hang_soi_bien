@@ -1,5 +1,6 @@
 package controller;
 
+import filter.SessionUser;
 import model.Account;
 import service.AccountService;
 
@@ -28,9 +29,17 @@ public class AccountController extends HttpServlet {
             case "logout":
                 logoutAccount(req, resp);
                 break;
-
+            case "register":
+                showFormRegister(req, resp);
+                break;
         }
     }
+
+    private void showFormRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/register.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
     private void logoutAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         session.invalidate();
@@ -49,7 +58,19 @@ public class AccountController extends HttpServlet {
             case "login":
                 checkLogin(req, resp);
                 break;
+            case "register":
+                registerAccount(req, resp);
+                break;
         }
+    }
+
+    private void registerAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String phoneNumber = req.getParameter("phoneNumber");
+        String password = req.getParameter("password");
+        String fullName = req.getParameter("fullName");
+        Account account = new Account(phoneNumber, password, fullName);
+        accountService.add(account);
+        resp.sendRedirect("/account?action=login");
     }
 
 
@@ -61,14 +82,15 @@ public class AccountController extends HttpServlet {
         if (accountService.checkAccount(phoneNumber, password)) {
             Account account = accountService.getAccount(phoneNumber, password);
             HttpSession session = req.getSession();
-            session.setAttribute("idAccount", account.getId());
+            session.setAttribute("role", account.getRole());
             session.setAttribute("fullName", account.getFullName());
-            int role = account.getRole();
-            if (role == 1) {
+            if (SessionUser.checkUser(req)) {
                 resp.sendRedirect("/admin?action=home");
             } else {
                 resp.sendRedirect("/account?action=login");
             }
+        } else {
+            resp.sendRedirect("/account?action=login");
         }
     }
 

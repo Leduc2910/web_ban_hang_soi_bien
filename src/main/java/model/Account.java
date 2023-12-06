@@ -21,6 +21,11 @@ public class Account {
         this.role = role;
         this.fullName = fullName;
     }
+    public Account(String phoneNumber, String password, String fullName) {
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.fullName = fullName;
+    }
 
     public int getId() {
         return id;
