@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AccountController", value = "/account")
 
@@ -35,6 +36,9 @@ public class AccountController extends HttpServlet {
             case "editAccount":
                 showFormEdit(req, resp);
                 break;
+            case "deleteAccount":
+                deleteAccount(req,resp);
+                break;
         }
     }
 
@@ -49,9 +53,15 @@ public class AccountController extends HttpServlet {
 
 
     private void showFormEdit(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
-    private void showAllAccount(HttpServletRequest req, HttpServletResponse resp) {
+    private void showAllAccount(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Account> accounts = accountService.findAll();
+        req.setAttribute("listAccount", accounts);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/managerAccount.jsp");
+        requestDispatcher.forward(req,resp);
+
     }
 
     @Override
@@ -88,5 +98,10 @@ public class AccountController extends HttpServlet {
     }
 
     private void editAccount(HttpServletRequest req, HttpServletResponse resp) {
+    }
+    private void deleteAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        accountService.delete(id);
+        resp.sendRedirect("/account?action=showAllAccount");
     }
 }
