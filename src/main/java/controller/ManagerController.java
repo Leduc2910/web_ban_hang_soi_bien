@@ -49,7 +49,7 @@ public class ManagerController extends HttpServlet {
                 showFormEditCategory(req, resp);
                 break;
             case "editAccount":
-                showFormEdit(req, resp);
+                showFormEditAccount(req, resp);
                 break;
             case "detailProduct":
                 showFormDetailProduct(req, resp);
@@ -89,7 +89,16 @@ public class ManagerController extends HttpServlet {
         resp.sendRedirect("/admin?action=managerProduct");
     }
 
-    private void showFormDetailAccount(HttpServletRequest req, HttpServletResponse resp) {
+    private void showFormDetailAccount(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Account a: accountService.findAll()) {
+            if (a.getId() == id){
+                req.setAttribute("account", a);
+            }
+
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/detailAccount");
+        requestDispatcher.forward(req,resp);
 
     }
 
@@ -104,7 +113,16 @@ public class ManagerController extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
-    private void showFormEdit(HttpServletRequest req, HttpServletResponse resp) {
+    private void showFormEditAccount(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        List<Account> accountList = accountService.findAll();
+        for (Account account: accountList) {
+            if (account.getId() == id){
+                req.setAttribute("account", account);
+            }
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editAccount.jsp");
+        requestDispatcher.forward(req,resp);
 
     }
 
@@ -193,7 +211,12 @@ public class ManagerController extends HttpServlet {
             case "editProduct":
                 editProduct(req, resp);
                 break;
+            case "editAccount":
+                editAccount(req,resp);
+                break;
+
         }
+
 
     }
 
@@ -219,8 +242,16 @@ public class ManagerController extends HttpServlet {
         Category category = new Category(id, name);
         categoryService.edit(id, category);
         resp.sendRedirect("/admin?action=managerCategory");
-
-
+    }
+    private void editAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String phoneNumber = req.getParameter("phoneNumber");
+        String password = req.getParameter("password");
+        int role = Integer.parseInt(req.getParameter("role"));
+        String fullName = req.getParameter("fullName");
+        Account account = new Account(id,phoneNumber,password,role,fullName);
+        accountService.edit(id, account);
+        resp.sendRedirect("/admin?action=managerAccount");
     }
 
     private void addCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -229,6 +260,7 @@ public class ManagerController extends HttpServlet {
         categoryService.add(category);
         resp.sendRedirect("/admin?action=managerCategory");
     }
+
 
     private void addProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
@@ -244,4 +276,5 @@ public class ManagerController extends HttpServlet {
         productService.add(product);
         resp.sendRedirect("/admin?action=managerProduct");
     }
+
 }

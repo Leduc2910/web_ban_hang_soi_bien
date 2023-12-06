@@ -11,6 +11,14 @@
     <title>Title</title>
 </head>
 <body>
+<form action="/admin?action=editAccount" method="post">
+    <input type="text" name="id" value="${account.id}" readonly>
+    <input type="text" name="phoneNumber" value="${account.phoneNumber}" >
+    <input type="text" name="password" value="${account.password}">
+    <input type="text" name="role" value="${account.role}">
+    <input type="text" name="fullName" value="${account.fullName}">
+    <button type="submit">Submit</button>
 
+</form>
 </body>
 </html>
