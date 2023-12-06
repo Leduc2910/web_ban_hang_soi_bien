@@ -1,8 +1,10 @@
 package controller;
 
 import filter.SessionUser;
+import model.Account;
 import model.Category;
 import model.Product;
+import service.AccountService;
 import service.CategoryService;
 import service.ProductService;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class ManagerController extends HttpServlet {
     private ProductService productService = new ProductService();
     private CategoryService categoryService = new CategoryService();
+    private AccountService accountService = new AccountService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,6 +36,9 @@ public class ManagerController extends HttpServlet {
             case "managerProduct":
                 showAllProduct(req, resp);
                 break;
+            case "managerAccount":
+                showAllAccount(req, resp);
+                break;
             case "addProduct":
                 showFormAddProduct(req, resp);
                 break;
@@ -42,8 +48,14 @@ public class ManagerController extends HttpServlet {
             case "editCategory":
                 showFormEditCategory(req, resp);
                 break;
+            case "editAccount":
+                showFormEdit(req, resp);
+                break;
             case "detailProduct":
                 showFormDetailProduct(req, resp);
+                break;
+            case "detailAccount":
+                showFormDetailAccount(req, resp);
                 break;
             case "deleteProduct":
                 deleteProduct(req, resp);
@@ -51,7 +63,17 @@ public class ManagerController extends HttpServlet {
             case "deleteCategory":
                 deleteCategory(req, resp);
                 break;
+            case "deleteAccount":
+                deleteAccount(req, resp);
+                break;
         }
+    }
+
+
+    private void deleteAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        accountService.delete(id);
+        resp.sendRedirect("/admin?action=managerAccount");
     }
 
     private void deleteCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -67,6 +89,10 @@ public class ManagerController extends HttpServlet {
         resp.sendRedirect("/admin?action=managerProduct");
     }
 
+    private void showFormDetailAccount(HttpServletRequest req, HttpServletResponse resp) {
+
+    }
+
     private void showFormDetailProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         for (Product p : productService.findAll()) {
@@ -76,6 +102,10 @@ public class ManagerController extends HttpServlet {
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/detailProduct.jsp");
         requestDispatcher.forward(req, resp);
+    }
+
+    private void showFormEdit(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
     private void showFormEditCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -112,6 +142,14 @@ public class ManagerController extends HttpServlet {
         req.setAttribute("listCategory", categories);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/addProduct.jsp");
         requestDispatcher.forward(req, resp);
+    }
+
+    private void showAllAccount(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Account> accounts = accountService.findAll();
+        req.setAttribute("listAccount", accounts);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/managerAccount.jsp");
+        requestDispatcher.forward(req, resp);
+
     }
 
     private void showAllProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

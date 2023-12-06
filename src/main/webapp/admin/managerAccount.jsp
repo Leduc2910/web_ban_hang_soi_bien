@@ -23,7 +23,7 @@
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
-            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - </span>
+            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - ${fullName}</span>
         </div>
         <div class="col-md-6">
             <div class="nav-item dropdown dropdown-right">
@@ -33,7 +33,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Account Detail</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="/account?action=logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -64,7 +64,8 @@
                         <a href="/admin?action=addProduct" class="sub-item">Add product</a>
                     </div>
                 </div>
-                <div class="item"><a href="#"><i class="fa-solid fa-user-group"></i>Account</a>
+                <div class="item"><a href="/admin?action=managerAccount"><i
+                        class="fa-solid fa-user-group"></i>Account</a>
                 </div>
             </div>
         </div>
@@ -78,11 +79,11 @@
                 <div class="col-12 mt-3">
                     <table class="table">
                         <tr class="navbar-light" style="background-color: #f8f6f8">
-                            <th scope="col">id</th>
-                            <th scope="col">phoneNumber</th>
-                            <th scope="col">password</th>
-                            <th scope="col">fullName</th>
-                            <th scope="col">role</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Role</th>
                             <th scope="col" colspan="3">Action</th>
                         </tr>
                         <c:forEach var="account" items="${listAccount}">
@@ -91,12 +92,20 @@
                                 <td>${account.phoneNumber}</td>
                                 <td>${account.password}</td>
                                 <td>${account.fullName}</td>
-                                <td>${account.role}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${account.role == 1}">
+                                            Admin
+                                        </c:when>
+                                        <c:otherwise>
+                                            Customer
+                                        </c:otherwise>
+                                    </c:choose></td>
                                 <td style="text-align: center">
                                     <a href="/admin?action=editAccount&id=${account.id}"
                                        class="btn btn-outline-warning">Edit</a>
                                 </td>
-                                <td style="text-align: center"><a href="/account?action=deleteAccount&id=${account.id}"
+                                <td style="text-align: center"><a href="/admin?action=deleteAccount&id=${account.id}"
                                                                   class="btn btn-outline-danger">Delete</a>
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=detailAccount&id=${account.id}"

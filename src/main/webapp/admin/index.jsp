@@ -26,7 +26,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Account Detail</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="/account?action=logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -57,12 +57,12 @@
                         <a href="/admin?action=addProduct" class="sub-item">Add product</a>
                     </div>
                 </div>
-                <div class="item"><a href="#"><i class="fa-solid fa-user-group"></i>Account</a>
+                <div class="item"><a href="/admin?action=managerAccount"><i
+                        class="fa-solid fa-user-group"></i>Account</a>
                 </div>
             </div>
         </div>
         <div class="content">
-
         </div>
     </div>
 </div>

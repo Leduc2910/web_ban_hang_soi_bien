@@ -16,7 +16,7 @@
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
-            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - </span>
+            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - ${fullName}</span>
         </div>
         <div class="col-md-6">
             <div class="nav-item dropdown dropdown-right">
@@ -26,7 +26,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Account Detail</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="/account?action=logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,8 @@
                         <a href="/admin?action=addProduct" class="sub-item">Add product</a>
                     </div>
                 </div>
-                <div class="item"><a href="#"><i class="fa-solid fa-user-group"></i>Account</a>
+                <div class="item"><a href="/admin?action=managerAccount"><i
+                        class="fa-solid fa-user-group"></i>Account</a>
                 </div>
             </div>
         </div>
@@ -104,7 +105,8 @@
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Description</label>
-                            <textarea class="form-control" id="inputDescription" name="description" style="height:330px; resize: none"></textarea>
+                            <textarea class="form-control" id="inputDescription" name="description"
+                                      style="height:330px; resize: none"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="inputImage">Image</label>

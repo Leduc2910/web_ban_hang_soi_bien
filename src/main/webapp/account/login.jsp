@@ -13,8 +13,8 @@
 <body>
 <form action="/account" method="post">
     <input type="hidden" name="action" value="login">
-    <input type="text" name="phoneNumber">
-    <input type="password" name="password">
+    <input type="text" name="phoneNumber" placeholder="Phone Number">
+    <input type="password" name="password" placeholder="Password">
     <button type="submit">Đăng nhập</button>
 </form>
 </body>
