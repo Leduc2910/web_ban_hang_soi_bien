@@ -1,5 +1,6 @@
 package controller;
 
+import filter.SessionUser;
 import model.Category;
 import model.Product;
 import service.CategoryService;
@@ -80,7 +81,7 @@ public class ManagerController extends HttpServlet {
     private void showFormEditCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         List<Category> categoryList = categoryService.findAll();
-        for (Category category: categoryList) {
+        for (Category category : categoryList) {
             if (category.getId() == id) {
                 req.setAttribute("category", category);
             }
@@ -88,7 +89,7 @@ public class ManagerController extends HttpServlet {
 
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editCategory.jsp");
-        requestDispatcher.forward(req,resp);
+        requestDispatcher.forward(req, resp);
     }
 
 
@@ -105,6 +106,7 @@ public class ManagerController extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editProduct.jsp");
         requestDispatcher.forward(req, resp);
     }
+
     private void showFormAddProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Category> categories = categoryService.findAll();
         req.setAttribute("listCategory", categories);
@@ -127,6 +129,8 @@ public class ManagerController extends HttpServlet {
     }
 
     private void showMenuManager(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String fullName = SessionUser.getNameUser(req);
+        req.setAttribute("fullName", fullName);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/index.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -175,7 +179,7 @@ public class ManagerController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         Category category = new Category(id, name);
-        categoryService.edit(id,category);
+        categoryService.edit(id, category);
         resp.sendRedirect("/admin?action=managerCategory");
 
 

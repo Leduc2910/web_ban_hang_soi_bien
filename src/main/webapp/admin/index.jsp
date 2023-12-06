@@ -16,7 +16,7 @@
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
-            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - </span>
+            <span style="font-size: 26px; padding-left: 16px; color: #545151">Admin page - ${fullName}</span>
         </div>
         <div class="col-md-6">
             <div class="nav-item dropdown dropdown-right">

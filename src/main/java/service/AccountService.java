@@ -8,14 +8,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class AccountService implements IAccountService<Account> {
     Connection connection = ConnectToMySQL.getConnection();
 
-    @Override
-    public void checkAccount(Account account) {
+    public Account getAccount(String phoneNumber, String password) {
+        for (Account a : findAll()) {
+            if (a.getPhoneNumber().equals(phoneNumber) && a.getPassword().equals(password)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkAccount(String phoneNumber, String password) {
+        for (Account a : findAll()) {
+            if (a.getPhoneNumber().equals(phoneNumber) && a.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

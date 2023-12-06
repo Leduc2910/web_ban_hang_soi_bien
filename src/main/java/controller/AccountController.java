@@ -1,5 +1,6 @@
 package controller;
 
+import model.Account;
 import service.AccountService;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "AccountController", value = "/account")
@@ -66,8 +68,23 @@ public class AccountController extends HttpServlet {
     }
 
 
-    private void checkLogin(HttpServletRequest req, HttpServletResponse resp) {
+    private void checkLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String phoneNumber = req.getParameter("phoneNumber");
+        String password = req.getParameter("password");
+        String error = "";
 
+        if (accountService.checkAccount(phoneNumber, password)) {
+            Account account = accountService.getAccount(phoneNumber, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("idAccount", account.getId());
+            session.setAttribute("fullName", account.getFullName());
+            int role = account.getRole();
+            if (role == 1) {
+                resp.sendRedirect("/admin?action=home");
+            } else {
+                resp.sendRedirect("/account?action=login");
+            }
+        }
     }
 
     private void editAccount(HttpServletRequest req, HttpServletResponse resp) {
