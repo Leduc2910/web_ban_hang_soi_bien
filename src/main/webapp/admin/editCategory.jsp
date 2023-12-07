@@ -92,8 +92,7 @@
                             <div class="form-group col-md-4"></div>
                             <div class="form-group col-md-4">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="/admin?action=managerCategory" class="btn btn-secondary"
-                                   data-dismiss="modal">Cancel</a>
+                                <a href="/admin?action=managerCategory" class="btn btn-secondary">Cancel</a>
                             </div>
                             <div class="form-group col-md-4"></div>
                         </div>

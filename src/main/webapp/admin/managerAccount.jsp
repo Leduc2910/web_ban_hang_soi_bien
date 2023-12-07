@@ -84,7 +84,7 @@
                             <th scope="col">Password</th>
                             <th scope="col">Full Name</th>
                             <th scope="col">Role</th>
-                            <th scope="col" colspan="3">Action</th>
+                            <th scope="col" colspan="2">Action</th>
                         </tr>
                         <c:forEach var="account" items="${listAccount}">
                             <tr>
@@ -107,9 +107,6 @@
                                 </td>
                                 <td style="text-align: center"><a href="/admin?action=deleteAccount&id=${account.id}"
                                                                   class="btn btn-outline-danger">Delete</a>
-                                </td>
-                                <td style="text-align: center"><a href="/admin?action=detailAccount&id=${account.id}"
-                                                                  class="btn btn-outline-primary">Detail</a>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -65,7 +65,7 @@
         <div class="content">
             <div class="row row-fix">
                 <div class="col-12">
-                    <h1><span style="font-weight: normal; font-size: smaller">Edit</span> Product</h1>
+                    <h1><span style="font-weight: normal; font-size: smaller">Detail</span> Product</h1>
                     <hr>
                 </div>
                 <div class="col-12 mt-3">

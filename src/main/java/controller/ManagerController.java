@@ -55,9 +55,6 @@ public class ManagerController extends HttpServlet {
                 case "detailProduct":
                     showFormDetailProduct(req, resp);
                     break;
-                case "detailAccount":
-                    showFormDetailAccount(req, resp);
-                    break;
                 case "deleteProduct":
                     deleteProduct(req, resp);
                     break;
@@ -93,19 +90,6 @@ public class ManagerController extends HttpServlet {
         resp.sendRedirect("/admin?action=managerProduct");
     }
 
-    private void showFormDetailAccount(HttpServletRequest req, HttpServletResponse resp) throws
-            ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        for (Account a : accountService.findAll()) {
-            if (a.getId() == id) {
-                req.setAttribute("account", a);
-            }
-
-        }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/detailAccount");
-        requestDispatcher.forward(req, resp);
-
-    }
 
     private void showFormDetailProduct(HttpServletRequest req, HttpServletResponse resp) throws
             ServletException, IOException {
@@ -226,6 +210,9 @@ public class ManagerController extends HttpServlet {
                 case "editProduct":
                     editProduct(req, resp);
                     break;
+                case "editAccount":
+                    editAccount(req, resp);
+                    break;
             }
         } else {
             resp.sendRedirect("/account?action=login");
@@ -262,7 +249,7 @@ public class ManagerController extends HttpServlet {
         String password = req.getParameter("password");
         int role = Integer.parseInt(req.getParameter("role"));
         String fullName = req.getParameter("fullName");
-        Account account = new Account(id, phoneNumber, password, role, fullName);
+        Account account = new Account(phoneNumber, password, role, fullName);
         accountService.edit(id, account);
         resp.sendRedirect("/admin?action=managerAccount");
     }
