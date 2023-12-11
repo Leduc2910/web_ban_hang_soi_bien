@@ -92,41 +92,14 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
                 <div class="cart-text">
-                    <span style="dmargin-bottom: 3px">Giỏ hàng của bạn</span>
+                    <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="wrapper my-row">
-        <div class="wrapper-title ">
-            <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
-        </div>
-        <div class="wrapper-category">
-            <c:forEach items="${listCategory}" var="category">
-                <a class="category" href="#">
-                    <img src="${category.image}">
-                    <span>${category.name}</span>
-                </a>
-            </c:forEach>
-        </div>
-        <div class="wrapper-product">
-            <c:forEach items="${listProduct}" var="product">
-                <a href="#" class="product">
-                    <div class="p-image">
-                        <img src="${product.image}" alt="">
-                    </div>
-                    <div class="p-brand">
-                        <span class="brand">${product.brand}</span>
-                    </div>
-                    <div class="h"></div>
-                    <span class="name">${product.name}</span>
-                    <span class="unit">${product.unit}</span>
-                    <span class="price">${product.price}</span>
-                    <button class="product-btn">Thêm vào giỏ</button>
-                </a>
-            </c:forEach>
-        </div>
+
     </div>
     <div id="footer">
         <div class="text-left">
