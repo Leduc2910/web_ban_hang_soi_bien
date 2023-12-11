@@ -237,11 +237,13 @@ body {
 
 .wrapper-product {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .product {
     display: flex;
     flex-direction: column;
+
     width: 20%;
     padding: 16px 16px;
     background-color: white;
