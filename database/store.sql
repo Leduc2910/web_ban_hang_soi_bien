@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
                             `id` int NOT NULL AUTO_INCREMENT,
                             `name` varchar(255) NOT NULL,
+                            `image` text NOT NULL,
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +36,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Rau-củ-quả'),(2,'Thịt tươi sống');
+INSERT INTO `category` VALUES (1,'Rau-củ-quả','https://lh3.googleusercontent.com/Tbx6y7pI3TBXLszBKa_UDfPXNWKufgrNzmalmQKEHHJ_88UWAyWQeXHPIu34GlAT1uzvNbaj26M9BPDmotQHMVZRMQ2rw1heiA=rw'),(2,'Thịt tươi sống','https://lh3.googleusercontent.com/F3vKdxaVPmRAnQha3-4U6dttbxoKG6efdBwZn56rrp4AkrbiIaZF_F1O1K4QBm_JpQ8s9QqO0w4fBLi0_gKbQrP9SFQrSASS=rw');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +88,7 @@ CREATE TABLE `user` (
                         `fullName` varchar(60) NOT NULL,
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `phoneNumber` (`phoneNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +97,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'0936759690','mihduc2910',1,'Lê Minh Đức'),(2,'0123456789','doande2002',0,'Doãn Đình Đề'),(3,'0987654312','truonglinh',1,'Trương Đăng Vũ Linh');
+INSERT INTO `user` VALUES (1,'0936759690','mihduc2910',1,'Lê Minh Đức'),(2,'0123456789','doande2002',0,'Doãn Đình Đề'),(4,'1111111111','tronghieu',1,'Nguyễn Trọng Hiếu');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -109,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-06 19:49:24
+-- Dump completed on 2023-12-11 19:36:11

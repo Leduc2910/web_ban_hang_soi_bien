@@ -122,9 +122,13 @@
         <div class="wrapper-product">
             <c:forEach items="${listProduct}" var="product">
                 <a href="#" class="product">
-                    <img src="${product.image}"
-                         alt="">
-                    <span class="brand">${product.brand}</span>
+                    <div class="p-image">
+                        <img src="${product.image}" alt="">
+                    </div>
+                    <div class="p-brand">
+                        <span class="brand">${product.brand}</span>
+                    </div>
+                    <div class="h"></div>
                     <span class="name">${product.name}</span>
                     <span class="unit">${product.unit}</span>
                     <span class="price">${product.price}</span>
