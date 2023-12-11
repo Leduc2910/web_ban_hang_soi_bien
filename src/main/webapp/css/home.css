@@ -301,6 +301,57 @@ body {
     background-color: white;
 }
 
+.wrapper1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*border: 1px solid red;*/
+    border-radius: 6px;
+    width: 835px;
+    height: 516px;
+    margin: 16px 534px;
+    padding: 80px;
+
+}
+
+.wrapper-login {
+    width: 60%;
+    text-align: center;
+}
+.wrapper-login div{
+    opacity: 60%;
+    margin-top: 16px;
+}
+.wrapper-login input{
+    width: 400px;
+    height: 40px;
+    padding: 10px 10px;
+    margin-top: 16px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid green;
+
+}
+.wrapper-login button{
+    margin-top: 16px;
+    width: 80px;
+    height: 32px;
+    outline: none;
+    border: 1px solid green;
+    border-radius: 4px;
+    background-color: rgb(0, 101, 69);
+    color: white;
+}
+.login-alert{
+    margin-top: 16px;
+    color: rgb(230, 152, 58);
+    background-color: rgb(255, 246, 236);
+    padding: 10px 10px;
+}
+.wrapper-login button:hover{
+    background-color: rgb(1, 73, 51);
+}
 
 
 
