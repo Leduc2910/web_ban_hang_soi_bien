@@ -117,8 +117,12 @@
             <div class="modal-body">
                 <form action="/admin?action=addCategory" method="post">
                     <div class="form-group">
-                        <label for="inputCategory" class="col-form-label">Name: </label>
-                        <input type="text" class="form-control" id="inputCategory" name="name">
+                        <label for="inputNameCategory" class="col-form-label">Name: </label>
+                        <input type="text" class="form-control" id="inputNameCategory" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImageCategory" class="col-form-label">Image: </label>
+                        <input type="text" class="form-control" id="inputImageCategory" name="image">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Create</button>

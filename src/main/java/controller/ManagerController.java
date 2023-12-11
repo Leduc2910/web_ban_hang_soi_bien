@@ -125,8 +125,6 @@ public class ManagerController extends HttpServlet {
             if (category.getId() == id) {
                 req.setAttribute("category", category);
             }
-
-
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editCategory.jsp");
         requestDispatcher.forward(req, resp);
@@ -238,7 +236,8 @@ public class ManagerController extends HttpServlet {
     private void editCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
-        Category category = new Category(id, name);
+        String image = req.getParameter("image");
+        Category category = new Category(id, name, image);
         categoryService.edit(id, category);
         resp.sendRedirect("/admin?action=managerCategory");
     }
@@ -256,7 +255,8 @@ public class ManagerController extends HttpServlet {
 
     private void addCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
-        Category category = new Category(name);
+        String image = req.getParameter("image");
+        Category category = new Category(name, image);
         categoryService.add(category);
         resp.sendRedirect("/admin?action=managerCategory");
     }

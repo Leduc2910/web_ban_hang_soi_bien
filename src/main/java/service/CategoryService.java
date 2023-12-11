@@ -15,10 +15,11 @@ public class CategoryService implements ICategoryService<Category> {
 
     @Override
     public void add(Category category) {
-        String sql = "insert into category(name) values (?)";
+        String sql = "insert into category(name, image) values (?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, category.getName());
+            preparedStatement.setString(2, category.getImage());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -29,13 +30,13 @@ public class CategoryService implements ICategoryService<Category> {
 
     @Override
     public void edit(int id, Category category) {
-        String sql = "update category set name = ?  where id = ?";
+        String sql = "update category set name = ?, image = ?  where id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, category.getName());
-            preparedStatement.setInt(2,id);
+            preparedStatement.setString(2, category.getImage());
+            preparedStatement.setInt(3, id);
             preparedStatement.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -50,8 +51,6 @@ public class CategoryService implements ICategoryService<Category> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -69,14 +68,13 @@ public class CategoryService implements ICategoryService<Category> {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                Category category = new Category(id, name);
+                String image = resultSet.getString("image");
+                Category category = new Category(id, name, image);
                 categoryList.add(category);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
         return categoryList;
     }
 }

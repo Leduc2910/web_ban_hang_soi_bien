@@ -73,7 +73,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-4"></div>
                             <div class="form-group col-md-4">
-                                <label for="inputID">Name</label>
+                                <label for="inputID">ID</label>
                                 <input type="text" class="form-control" id="inputID" name="id"
                                        value="${category.id}" readonly>
                             </div>
@@ -85,6 +85,15 @@
                                 <label for="inputName">Name</label>
                                 <input type="text" class="form-control" id="inputName" name="name"
                                        value="${category.name}">
+                            </div>
+                            <div class="form-group col-md-4"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4"></div>
+                            <div class="form-group col-md-4">
+                                <label for="inputImage">Image</label>
+                                <input type="text" class="form-control" id="inputImage" name="image"
+                                       value="${category.image}">
                             </div>
                             <div class="form-group col-md-4"></div>
                         </div>
