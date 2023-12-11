@@ -35,7 +35,7 @@
     <div class="header">
         <div class="banner">
             <img src="https://lh3.googleusercontent.com/V94Qr7sGhQCOk4CWQplwsJTMKmgs6ZJz8ncUrck4_0GbXSRiBsm7uIOaJpE-KDhIJPA_3axl2DTQTPP2YhYZgYS3IBPk1UomYw=rw-w1920"
-                 alt="" style="width: 100%;">
+                 alt="">
         </div>
         <div class="contact">
             <div class="contact-link my-row">
@@ -100,38 +100,7 @@
         </div>
     </div>
     <div class="wrapper my-row">
-        <div class="wrapper-title ">
-            <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
-        </div>
-        <div class="wrapper-category">
-            <c:forEach items="${listCategory}" var="category">
-                <a class="category" href="#">
-                    <img src="${category.image}">
-                    <span>${category.name}</span>
-                </a>
-            </c:forEach>
-        </div>
-        <div class="wrapper-product">
-            <c:forEach items="${listProduct}" var="product">
-                <a href="#" class="product">
-                    <img src="${product.image}" alt="">
-                    <div class="p-brand">
-                            ${product.brand}
-                    </div>
-                    <div class="p-name">
-                            ${product.name}
-                    </div>
-                    <div class="p-unit">
-                        Đơn vị tính: ${product.unit}
-                    </div>
-                    <div class="p-price">
-                        <fmt:setLocale value="vi_VN"/>
-                        <fmt:formatNumber value="${product.price}" type="currency"/>
-                    </div>
-                    <button class="product-btn">Thêm vào giỏ</button>
-                </a>
-            </c:forEach>
-        </div>
+
     </div>
     <div id="footer">
         <div class="text-left">
@@ -148,6 +117,7 @@
             <img src="https://shopfront-cdn.tekoapis.com/common/da-dang-ky.png" alt="">
         </div>
     </div>
+
 </div>
 </body>
 </html>

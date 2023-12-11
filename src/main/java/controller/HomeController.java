@@ -25,6 +25,8 @@ public class HomeController extends HttpServlet {
             case "home":
                 showHomePage(req, resp);
                 break;
+            case "detailProduct":
+
         }
     }
 
@@ -36,6 +38,7 @@ public class HomeController extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/index.jsp");
         requestDispatcher.forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
