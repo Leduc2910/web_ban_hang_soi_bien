@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,9 +35,9 @@
     <div class="header">
         <div class="banner">
             <img src="https://lh3.googleusercontent.com/V94Qr7sGhQCOk4CWQplwsJTMKmgs6ZJz8ncUrck4_0GbXSRiBsm7uIOaJpE-KDhIJPA_3axl2DTQTPP2YhYZgYS3IBPk1UomYw=rw-w1920"
-                 alt="">
+                 alt="" style="width: 100%;">
         </div>
-        <div class="contact">
+        <div class=" contact">
             <div class="contact-link my-row">
                 <a href="">Hệ thống cửa hàng</a>
                 <a href="">Chính sách giao hàng</a>
@@ -92,7 +93,7 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
                 <div class="cart-text">
-                    <span style="dmargin-bottom: 3px">Giỏ hàng của bạn</span>
+                    <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
             </div>
@@ -102,7 +103,7 @@
         <div class="wrapper-title ">
             <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
         </div>
-        <div class="wrapper-category ">
+        <div class="wrapper-category">
             <div class="category">
                 <img src="https://lh3.googleusercontent.com/Vv4QFdO86gY1PuydiHxlYKbp1TylcipH5xKdPV5A3siNSH-s8-l6xFM4xZUkxqgr8n5i1UWY11WI-NhFjIZrvrcBfRfD3PI=rw"
                      alt="">
@@ -122,16 +123,20 @@
         <div class="wrapper-product">
             <c:forEach items="${listProduct}" var="product">
                 <a href="#" class="product">
-                    <div class="p-image">
-                        <img src="${product.image}" alt="">
-                    </div>
+                    <img src="${product.image}" alt="">
                     <div class="p-brand">
-                        <span class="brand">${product.brand}</span>
+                            ${product.brand}
                     </div>
-                    <div class="h"></div>
-                    <span class="name">${product.name}</span>
-                    <span class="unit">${product.unit}</span>
-                    <span class="price">${product.price}</span>
+                    <div class="p-name">
+                            ${product.name}
+                    </div>
+                    <div class="p-unit">
+                        Đơn vị tính: ${product.unit}
+                    </div>
+                    <div class="p-price">
+                        <fmt:setLocale value="vi_VN"/>
+                        <fmt:formatNumber value="${product.price}" type="currency"/>
+                    </div>
                     <button class="product-btn">Thêm vào giỏ</button>
                 </a>
             </c:forEach>
@@ -152,7 +157,6 @@
             <img src="https://shopfront-cdn.tekoapis.com/common/da-dang-ky.png" alt="">
         </div>
     </div>
-
 </div>
 </body>
 </html>

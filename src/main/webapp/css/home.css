@@ -57,17 +57,21 @@ body {
     color: #106f51 !important;
     border-color: #106f51 !important;
 }
+
 .my-dropdown-item {
     display: flex;
     align-items: center;
 }
-.my-dropdown-item img{
+
+.my-dropdown-item img {
     width: 20px;
     margin-right: 5px;
 }
-.my-dropdown-item span{
+
+.my-dropdown-item span {
     font-size: 14px;
 }
+
 .navbar-search {
     width: 38%;
 }
@@ -243,38 +247,49 @@ body {
 .product {
     display: flex;
     flex-direction: column;
-
     width: 20%;
     padding: 16px 16px;
     background-color: white;
     border: 3px solid #f8f8fc;
 }
 
+.product:hover {
+    text-decoration: none;
+}
+
 .product img {
     width: 100%;
 }
 
-.product span {
-    margin-bottom: 8px;
+.product .p-brand {
+    font-weight: 500;
+    color: rgb(130, 134, 158);
+    font-size: 13px;
+    margin-bottom: 0.25rem;
 }
 
-.product .brand {
-    font-weight: bold;
-    color: gray;
+.product .p-name {
+    height: 3rem;
+    color : rgb(67, 70, 87);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
 }
 
-.product .name {
-    margin-bottom: 40px;
+.product .p-unit {
+    margin-top: 0.25rem;
+    color: rgb(130, 134, 158);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
 }
 
-.product .unit {
-    color: gray;
-}
-
-.product .price {
-    margin-bottom: 40px;
-    font-weight: bold;
-    color: #005b3e;
+.product .p-price {
+    height: 3rem;
+    color: rgb(0, 101, 69);
+    font-weight: 700;
+    line-height: 24px;
+    font-size: 16px;
 }
 
 .product .product-btn {
