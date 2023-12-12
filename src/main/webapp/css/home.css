@@ -29,6 +29,11 @@ body {
 
 }
 
+.contact a:hover {
+    text-decoration: unset;
+
+}
+
 .background-navbar {
     background-color: #ffffff;
     height: auto;
@@ -61,15 +66,20 @@ body {
 .my-dropdown-item {
     display: flex;
     align-items: center;
+    padding: 10px 10px;
+    min-width: 200px;
 }
-
+.my-dropdown-item:active {
+    background-color: #e9ecef;
+    color: black;
+}
 .my-dropdown-item img {
     width: 20px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .my-dropdown-item span {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .navbar-search {
@@ -90,6 +100,7 @@ body {
     border: none;
     background-color: transparent;
     padding-left: 15px;
+    outline: none;
 }
 
 #search button {
@@ -106,6 +117,11 @@ body {
 .navbar-login {
     display: flex;
     align-items: center;
+    color: #a0a3ad;
+}
+
+.navbar-login:hover {
+    text-decoration: none;
     color: #a0a3ad;
 }
 
@@ -226,22 +242,30 @@ body {
     flex-direction: column;
     align-items: center;
     width: 10%;
+    height: 118px;
     padding: 0 12px;
+    color: black;
+    padding: 15px 15px;
+}
+
+.category:hover {
+    text-decoration: unset;
+    color: unset;
 }
 
 .category img {
-    width: 44px;
-    height: 44px;
+    height: 50%;
 }
 
 .category span {
     text-align: center;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .wrapper-product {
     display: flex;
     flex-wrap: wrap;
+    background-color: transparent;
 }
 
 .product {
@@ -250,7 +274,7 @@ body {
     width: 20%;
     padding: 16px 16px;
     background-color: white;
-    border: 3px solid #f8f8fc;
+    border: 1px solid #f8f8fc;
 }
 
 .product:hover {
@@ -270,7 +294,7 @@ body {
 
 .product .p-name {
     height: 3rem;
-    color : rgb(67, 70, 87);
+    color: rgb(67, 70, 87);
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
@@ -301,29 +325,31 @@ body {
     background-color: white;
 }
 
-.wrapper1{
+.wrapper1 {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /*border: 1px solid red;*/
     border-radius: 6px;
     width: 835px;
     height: 516px;
     margin: 16px 534px;
     padding: 80px;
-
+    background-color: white;
+    border-radius: 10px;
 }
 
 .wrapper-login {
     width: 60%;
     text-align: center;
 }
-.wrapper-login div{
+
+.wrapper-login .login-request {
     opacity: 60%;
     margin-top: 16px;
 }
-.wrapper-login input{
+
+.wrapper-login input {
     width: 400px;
     height: 40px;
     padding: 10px 10px;
@@ -333,26 +359,35 @@ body {
     border: 1px solid green;
 
 }
-.wrapper-login button{
-    margin-top: 16px;
-    width: 80px;
-    height: 32px;
-    outline: none;
+.login-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.login-btn .my-btn {
+    width: 100px;
+    height: 40px;
     border: 1px solid green;
     border-radius: 4px;
     background-color: rgb(0, 101, 69);
     color: white;
 }
-.login-alert{
+
+.login-btn a {
+    padding: 8px;
+    margin-left: 20px;
+}
+.login-btn .my-btn:hover {
+    background-color: rgb(1, 73, 51);
+}
+
+.login-alert {
     margin-top: 16px;
     color: rgb(230, 152, 58);
     background-color: rgb(255, 246, 236);
     padding: 10px 10px;
 }
-.wrapper-login button:hover{
-    background-color: rgb(1, 73, 51);
-}
-
-
 
 

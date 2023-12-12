@@ -43,7 +43,7 @@ public class AccountController extends HttpServlet {
     private void logoutAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         session.invalidate();
-        resp.sendRedirect("/account?action=login");
+        resp.sendRedirect("/home?action=home");
     }
 
     private void showFormLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

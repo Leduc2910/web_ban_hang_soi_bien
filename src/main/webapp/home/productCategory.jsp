@@ -35,7 +35,7 @@
     <div class="header">
         <div class="banner">
             <img src="https://lh3.googleusercontent.com/V94Qr7sGhQCOk4CWQplwsJTMKmgs6ZJz8ncUrck4_0GbXSRiBsm7uIOaJpE-KDhIJPA_3axl2DTQTPP2YhYZgYS3IBPk1UomYw=rw-w1920"
-                 alt="">
+                 alt="" style="width: 100%;">
         </div>
         <div class="contact">
             <div class="contact-link my-row">
@@ -76,7 +76,7 @@
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-            <div class="navbar-login">
+            <a class="navbar-login" href="/account?action=login">
                 <div class="login_icon">
                     <i class="fa-regular fa-circle-user"></i>
                 </div>
@@ -84,7 +84,7 @@
                     <span style="margin-bottom: 3px">Đăng nhập</span>
                     <span>Đăng ký</span>
                 </div>
-            </div>
+            </a>
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
@@ -100,7 +100,52 @@
         </div>
     </div>
     <div class="wrapper my-row">
-
+        <div class="wrapper-title ">
+            <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
+        </div>
+        <div class="wrapper-category">
+            <a class="category" href="/home?action=home">
+                <img src="https://lh3.googleusercontent.com/Vv4QFdO86gY1PuydiHxlYKbp1TylcipH5xKdPV5A3siNSH-s8-l6xFM4xZUkxqgr8n5i1UWY11WI-NhFjIZrvrcBfRfD3PI=rw">
+                <span>Độc quyền tại sói biển</span>
+            </a>
+            <c:forEach items="${listCategory}" var="category">
+                <c:choose>
+                    <c:when test="${category.id == idCategory}">
+                        <a class="category" href="/home?action=category&id=${category.id}" style="background-color: rgba(255,193,7,1)">
+                            <img src="${category.image}">
+                            <span>${category.name}</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="category" href="/home?action=category&id=${category.id}">
+                            <img src="${category.image}">
+                            <span>${category.name}</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+        <div class="wrapper-product">
+            <c:forEach items="${productCategory}" var="product">
+                <a href="#" class="product">
+                    <img src="${product.image}" alt="">
+                    <div class="p-brand">
+                            ${product.brand}
+                    </div>
+                    <div class="p-name">
+                            ${product.name}
+                    </div>
+                    <div class="p-unit">
+                        Đơn vị tính: ${product.unit}
+                    </div>
+                    <div class="p-price">
+                        <fmt:setLocale value="vi_VN"/>
+                        <fmt:formatNumber value="${product.price}" type="currency"/>
+                    </div>
+                    <button class="product-btn">Thêm vào giỏ</button>
+                </a>
+            </c:forEach>
+        </div>
     </div>
     <div id="footer">
         <div class="text-left">
@@ -117,7 +162,6 @@
             <img src="https://shopfront-cdn.tekoapis.com/common/da-dang-ky.png" alt="">
         </div>
     </div>
-
 </div>
 </body>
 </html>

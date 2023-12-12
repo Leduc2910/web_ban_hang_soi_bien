@@ -24,7 +24,6 @@
                     <i class="fa-solid fa-user" style="color: #2968d6; font-size: 20px"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Account Detail</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/account?action=logout">Logout</a>
                 </div>

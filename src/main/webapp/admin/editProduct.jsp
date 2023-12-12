@@ -24,7 +24,6 @@
                     <i class="fa-solid fa-user" style="color: #2968d6; font-size: 20px"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Account Detail</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/account?action=logout">Logout</a>
                 </div>
@@ -117,7 +116,7 @@
                         <div class="form-group">
                             <label for="inputDescription">Description</label>
                             <textarea class="form-control" id="inputDescription"
-                                      name="description">${product.description}</textarea>
+                                      name="description" style="resize: none; height: 327px">${product.description}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="inputImage">Image</label>
