@@ -127,7 +127,7 @@
         </div>
         <div class="wrapper-product">
             <c:forEach items="${productCategory}" var="product">
-                <a href="#" class="product">
+                <a href="/product?action=detail&id=${product.id}" class="product">
                     <img src="${product.image}" alt="">
                     <div class="p-brand">
                             ${product.brand}
