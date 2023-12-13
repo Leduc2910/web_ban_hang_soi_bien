@@ -31,4 +31,4 @@ $(document).ready(function () {
     });
 });
 
-/*modal show*/
+/*regex register*/

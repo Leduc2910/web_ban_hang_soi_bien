@@ -27,7 +27,14 @@ public class ProductController extends HttpServlet {
             case "detail":
                 showProductDetail(req, resp);
                 break;
+            case "category":
+                showAllProductCategory(req, resp);
+                break;
         }
+    }
+
+    private void showAllProductCategory(HttpServletRequest req, HttpServletResponse resp) {
+
     }
 
     private void showProductDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

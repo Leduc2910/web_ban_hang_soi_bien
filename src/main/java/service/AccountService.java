@@ -30,7 +30,14 @@ public class AccountService implements IAccountService<Account> {
         }
         return false;
     }
-
+    public boolean checkPhoneNumber(String phoneNumber) {
+        for (Account a : findAll()) {
+            if (a.getPhoneNumber().equals(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void add(Account account) {
         List<Account> accounts = findAll();

@@ -355,7 +355,7 @@ body {
     width: 400px;
     height: 40px;
     padding: 10px 10px;
-    margin-top: 16px;
+    margin-top: 15px;
     border-radius: 4px;
     outline: none;
     border: 1px solid green;
@@ -438,11 +438,13 @@ body {
     flex-direction: column;
     width: 60%;
 }
+
 .info .info-name {
     color: black;
     font-weight: 550;
     font-size: 26px;
 }
+
 .info .info-brand {
     color: rgb(130, 134, 158);
     height: 30px;
@@ -476,6 +478,11 @@ body {
     flex-direction: row;
     width: 100%;
     margin-top: 40px;
+}
+
+.info .border-top {
+    border: 1px solid #a1a0a0;
+    width: 100%;
 }
 
 .info-button .buy-now {
@@ -517,15 +524,18 @@ body {
     flex-direction: row;
     align-items: center;
 }
+
 .logo-web img {
     width: 40px;
     border-radius: 50%;
 }
+
 .logo-web span {
     margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }
+
 .right-side .detail-web {
     width: 100%;
     background-color: white;
@@ -535,9 +545,11 @@ body {
     flex-direction: column;
     padding: 10px 10px;
 }
+
 .detail-web span {
     margin: 0 0 10px 10px
 }
+
 .description-product {
     width: 100%;
     background-color: white;
@@ -546,6 +558,7 @@ body {
     flex-direction: column;
     padding: 20px 20px;
 }
+
 .description-product h4 {
     margin-bottom: 30px;
 }
