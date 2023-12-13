@@ -90,7 +90,39 @@
         <a href="/home?action=home">Trang chủ</a> > ${product.name}
     </div>
     <div class="wrapper my-row">
+        <div class="leftside">
 
+        </div>
+        <div class="middle">
+            <div class="middle-top">
+                <span style="font-weight: bold; font-size: 13px">Sắp xếp theo</span>
+                <div>
+                    <button>Khuyến mãi giá tốt</button>
+                </div>
+                <div>
+                    <button>Giá tăng dần</button>
+                </div>
+                <div>
+                    <button>Giá giảm dần</button>
+                </div>
+                <div>
+                    <button>Sản phẩm mới nhất</button>
+                </div>
+                <div>
+                    <button>Sản phẩm bán chạy nhất</button>
+                </div>
+            </div>
+            <div class="middle-bot">
+                <div class="middle-bot-product">
+                    <a href=""><img src="https://lh3.googleusercontent.com/3Rt7Pe_nmWSrHOG_-iT1aoWEhUZzFa2CFAq4OvwbXtflT6I-A9xPoKimhRDkiRdJU76sGMPmarT2QUA-4QC_KnUB7JovgWE=w230-rw" alt=""></a>
+                    <span class="p-brand">Đang cập nhật</span>
+                    <span class="p-name">Name product</span>
+                    <span class="p-unit">Đơn vị tính: túi</span>
+                    <span class="p-price">18.000 đ</span>
+                    <button class="product-btn">Thêm vào giở hàng</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="footer">
         <div class="text-left">
