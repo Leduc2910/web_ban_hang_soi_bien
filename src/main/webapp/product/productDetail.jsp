@@ -99,16 +99,16 @@
         <div class="detail-product">
             <div class="d-product">
                 <div class="image">
-                    <img src="https://lh3.googleusercontent.com/NVQReUdqdwDIyK23lpJzt_eFHWXLB3bm1HgwjgnUtw-4dKXLMo7eEr5iiMECANiPa_6sNHt5OXktfxiq3qdm9SmVazLezgKc=rw"
+                    <img src="${product.image}"
                          alt="" style="width: 100%">
                 </div>
                 <div class="info">
-                    <span class="info-name">${product.name}</span>
-                    <span class="info-brand">Thương hiệu ${product.brand}</span>
-                    <span class="info-unit">Đơn vị tính ${product.unit}</span>
-                    <span class="info-weight">KHỐI LƯỢNG ${product.weight} KG</span>
-                    <span class="info-price"><fmt:setLocale value="vi_VN"/>
-                        <fmt:formatNumber value="${product.price}" type="currency"/></span>
+                    <div class="info-name">${product.name}</div>
+                    <div class="info-brand">Thương hiệu ${product.brand}</div>
+                    <div class="info-unit">Đơn vị tính ${product.unit}</div>
+                    <div class="info-weight">KHỐI LƯỢNG ${product.weight} KG</div>
+                    <div class="info-price"><fmt:setLocale value="vi_VN"/>
+                        <fmt:formatNumber value="${product.price}" type="currency"/></div>
                     <div class="info-button">
                         <button class="buy-now">MUA NGAY</button>
                         <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
