@@ -56,7 +56,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <c:forEach items="${listCategory}" var="category">
-                            <a class="dropdown-item my-dropdown-item" href="#">
+                            <a class="dropdown-item my-dropdown-item" href="/product?action=category&id=${category.id}">
                                 <img src="${category.image}">
                                 <span>${category.name}</span>
                             </a>
@@ -70,15 +70,49 @@
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-            <a class="navbar-login" href="/account?action=login">
-                <div class="login_icon">
-                    <i class="fa-regular fa-circle-user"></i>
-                </div>
-                <div class="login-text">
-                    <span style="margin-bottom: 3px">Đăng nhập</span>
-                    <span>Đăng ký</span>
-                </div>
-            </a>
+            <c:choose>
+                <c:when test="${account != null}">
+                    <div class="navbar-login">
+                        <button class="login_icon dropdown-login" type="button" data-toggle="dropdown"
+                                style="color: #a0a3ad;">
+                            <i class="fa-regular fa-circle-user"></i>
+                        </button>
+                        <div class="dropdown-menu" style="top:20px">
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <span>Thông tin tài khoản</span>
+                            </a>
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#" style="margin-top: 10px">
+                                <i class="fa-regular fa-clipboard"></i>
+                                <span>Quản lý đơn hàng</span>
+                            </a>
+                            <c:if test="${account.role == 1}">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Quản lý</span>
+                                </a>
+                            </c:if>
+                            <div class="dropdown-item my-dropdown-item fix-dropdown">
+                                <a type="submit" class="btn btn-success my-btn" style="margin-top: 10px"
+                                   href="/account?action=logout">Đăng xuất</a>
+                            </div>
+                        </div>
+                        <div class="login-text">
+                            <span style="margin-bottom: 3px">Xin chào,</span>
+                            <span style="color: black">${account.fullName}</span>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise> <a class="navbar-login" href="/account?action=login">
+                    <div class="login_icon">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="login-text">
+                        <span style="margin-bottom: 3px">Đăng nhập</span>
+                        <span>Đăng ký</span>
+                    </div>
+                </a></c:otherwise>
+            </c:choose>
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>

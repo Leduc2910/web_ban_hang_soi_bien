@@ -49,7 +49,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <c:forEach items="${listCategory}" var="category">
-                            <a class="dropdown-item my-dropdown-item" href="#">
+                            <a class="dropdown-item my-dropdown-item" href="/product?action=category&id=${category.id}">
                                 <img src="${category.image}">
                                 <span>${category.name}</span>
                             </a>
@@ -63,15 +63,49 @@
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-            <a class="navbar-login" href="/account?action=login">
-                <div class="login_icon">
-                    <i class="fa-regular fa-circle-user"></i>
-                </div>
-                <div class="login-text">
-                    <span style="margin-bottom: 3px">Đăng nhập</span>
-                    <span>Đăng ký</span>
-                </div>
-            </a>
+            <c:choose>
+                <c:when test="${account != null}">
+                    <div class="navbar-login">
+                        <button class="login_icon dropdown-login" type="button" data-toggle="dropdown"
+                                style="color: #a0a3ad;">
+                            <i class="fa-regular fa-circle-user"></i>
+                        </button>
+                        <div class="dropdown-menu" style="top:20px">
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <span>Thông tin tài khoản</span>
+                            </a>
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#" style="margin-top: 10px">
+                                <i class="fa-regular fa-clipboard"></i>
+                                <span>Quản lý đơn hàng</span>
+                            </a>
+                            <c:if test="${account.role == 1}">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Quản lý</span>
+                                </a>
+                            </c:if>
+                            <div class="dropdown-item my-dropdown-item fix-dropdown">
+                                <a type="submit" class="btn btn-success my-btn" style="margin-top: 10px"
+                                   href="/account?action=logout">Đăng xuất</a>
+                            </div>
+                        </div>
+                        <div class="login-text">
+                            <span style="margin-bottom: 3px">Xin chào,</span>
+                            <span style="color: black">${account.fullName}</span>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise> <a class="navbar-login" href="/account?action=login">
+                    <div class="login_icon">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="login-text">
+                        <span style="margin-bottom: 3px">Đăng nhập</span>
+                        <span>Đăng ký</span>
+                    </div>
+                </a></c:otherwise>
+            </c:choose>
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
@@ -87,39 +121,46 @@
         </div>
     </div>
     <div class="href-product my-row">
-        <a href="/home?action=home">Trang chủ</a> > ${product.name}
+        <a href="/home?action=home">Trang chủ</a> > ${category.name}
     </div>
     <div class="wrapper my-row">
-        <div class="leftside">
+        <div class="product-category">
+            <div class="left-side">
 
-        </div>
-        <div class="middle">
-            <div class="middle-top">
-                <span style="font-weight: bold; font-size: 13px">Sắp xếp theo</span>
-                <div>
-                    <button>Khuyến mãi giá tốt</button>
-                </div>
-                <div>
-                    <button>Giá tăng dần</button>
-                </div>
-                <div>
-                    <button>Giá giảm dần</button>
-                </div>
-                <div>
-                    <button>Sản phẩm mới nhất</button>
-                </div>
-                <div>
-                    <button>Sản phẩm bán chạy nhất</button>
-                </div>
             </div>
-            <div class="middle-bot">
-                <div class="middle-bot-product">
-                    <a href=""><img src="https://lh3.googleusercontent.com/3Rt7Pe_nmWSrHOG_-iT1aoWEhUZzFa2CFAq4OvwbXtflT6I-A9xPoKimhRDkiRdJU76sGMPmarT2QUA-4QC_KnUB7JovgWE=w230-rw" alt=""></a>
-                    <span class="p-brand">Đang cập nhật</span>
-                    <span class="p-name">Name product</span>
-                    <span class="p-unit">Đơn vị tính: túi</span>
-                    <span class="p-price">18.000 đ</span>
-                    <button class="product-btn">Thêm vào giở hàng</button>
+            <div class="main-side">
+                <div class="main-option">
+                    <span class="title">Sắp xếp theo</span>
+                    <div class="option">
+                        <a class="btn btn-outline-secondary" href="/product?action=ascending&id=${category.id}">Giá tăng dần</a>
+                    </div>
+                    <div class="option">
+                        <a class="btn btn-outline-secondary" href="/product?action=descending&id=${category.id}">Giá giảm dần</a>
+                    </div>
+                </div>
+                <div class="main-product">
+                    <c:forEach var="product" items="${listProduct}">
+                        <c:if test="${product.category.id == category.id}">
+                            <a href="/product?action=detail&id=${product.id}" class="product">
+                                <img src="${product.image}"
+                                     alt="">
+                                <div class="p-brand">
+                                        ${product.brand}
+                                </div>
+                                <div class="p-name">
+                                        ${product.name}
+                                </div>
+                                <div class="p-unit">
+                                    Đơn vị tính: ${product.unit}
+                                </div>
+                                <div class="p-price">
+                                    <fmt:setLocale value="vi_VN"/>
+                                    <fmt:formatNumber value="${product.price}" type="currency"/>
+                                </div>
+                                <button class="product-btn">Thêm vào giỏ</button>
+                            </a>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </div>
         </div>

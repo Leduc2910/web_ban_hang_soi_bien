@@ -72,7 +72,7 @@ CREATE TABLE `product`
     `price`       int DEFAULT '0',
     `description` text         NOT NULL,
     `image`       text         NOT NULL,
-    `idCategory`  int          NOT NULL,
+    `idCategory`  int          null,
     PRIMARY KEY (`id`),
     KEY           `idCategory` (`idCategory`),
     CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idCategory`) REFERENCES `category` (`id`)

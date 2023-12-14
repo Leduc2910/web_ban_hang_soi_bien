@@ -179,8 +179,7 @@ public class ManagerController extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
-    private void showMenuManager(HttpServletRequest req, HttpServletResponse resp) throws
-            ServletException, IOException {
+    private void showMenuManager(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String fullName = SessionUser.getNameUser(req);
         req.setAttribute("fullName", fullName);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/index.jsp");

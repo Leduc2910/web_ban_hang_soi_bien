@@ -40,10 +40,14 @@ public class AccountController extends HttpServlet {
     }
 
     private void showFormRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Category> categoryList = categoryService.findAll();
-        req.setAttribute("listCategory", categoryList);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/register.jsp");
-        requestDispatcher.forward(req, resp);
+        if (SessionUser.getUserSession(req) == null) {
+            List<Category> categoryList = categoryService.findAll();
+            req.setAttribute("listCategory", categoryList);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/register.jsp");
+            requestDispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect("/home?action=home");
+        }
     }
 
     private void logoutAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -53,10 +57,15 @@ public class AccountController extends HttpServlet {
     }
 
     private void showFormLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Category> categoryList = categoryService.findAll();
-        req.setAttribute("listCategory", categoryList);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
-        requestDispatcher.forward(req, resp);
+        if (SessionUser.getUserSession(req) == null) {
+            List<Category> categoryList = categoryService.findAll();
+            req.setAttribute("listCategory", categoryList);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
+            requestDispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect("/home?action=home");
+        }
+
     }
 
     @Override
@@ -115,19 +124,24 @@ public class AccountController extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String password = req.getParameter("password");
         String error = "";
-
-        if (accountService.checkAccount(phoneNumber, password)) {
-            Account account = accountService.getAccount(phoneNumber, password);
-            HttpSession session = req.getSession();
-            session.setAttribute("role", account.getRole());
-            session.setAttribute("fullName", account.getFullName());
-            resp.sendRedirect("/admin?action=home");
+        if (SessionUser.getUserSession(req) == null) {
+            if (accountService.checkAccount(phoneNumber, password)) {
+                Account account = accountService.getAccount(phoneNumber, password);
+                HttpSession session = req.getSession();
+                session.setAttribute("account", account);
+                session.setAttribute("role", account.getRole());
+                session.setAttribute("fullName", account.getFullName());
+                resp.sendRedirect("/home?action=home");
+            } else {
+                error = "* Tài khoản hoặc mật khẩu không hợp lệ.";
+                req.setAttribute("error", error);
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
+                requestDispatcher.forward(req, resp);
+            }
         } else {
-            error = "* Tài khoản hoặc mật khẩu không hợp lệ.";
-            req.setAttribute("error", error);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
-            requestDispatcher.forward(req, resp);
+            resp.sendRedirect("/account?action=logout");
         }
+
     }
 
 }

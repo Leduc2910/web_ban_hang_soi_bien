@@ -1,5 +1,7 @@
 package controller;
 
+import filter.SessionUser;
+import model.Account;
 import model.Category;
 import model.Product;
 import service.CategoryService;
@@ -45,6 +47,8 @@ public class HomeController extends HttpServlet {
         req.setAttribute("productCategory", productList);
         List<Category> categoryList = categoryService.findAll();
         req.setAttribute("listCategory", categoryList);
+        Account account = SessionUser.getUserSession(req);
+        req.setAttribute("account", account);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/productCategory.jsp");
         requestDispatcher.forward(req, resp);
     }
@@ -56,6 +60,8 @@ public class HomeController extends HttpServlet {
         req.setAttribute("listProduct", productList);
         List<Category> categoryList = categoryService.findAll();
         req.setAttribute("listCategory", categoryList);
+        Account account = SessionUser.getUserSession(req);
+        req.setAttribute("account", account);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/index.jsp");
         requestDispatcher.forward(req, resp);
     }
