@@ -69,7 +69,7 @@ CREATE TABLE `product`
     `brand`       varchar(255) NOT NULL,
     `unit`        varchar(50)  NOT NULL,
     `weight` double NOT NULL,
-    `price`       int DEFAULT '0',
+    `price`       double DEFAULT '0',
     `description` text         NOT NULL,
     `image`       text         NOT NULL,
     `idCategory`  int          null,
