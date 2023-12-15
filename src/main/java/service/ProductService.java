@@ -23,7 +23,7 @@ public class ProductService implements IProductService<Product> {
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getUnit());
             preparedStatement.setDouble(4, product.getWeight());
-            preparedStatement.setInt(5, product.getPrice());
+            preparedStatement.setDouble(5, product.getPrice());
             preparedStatement.setString(6, product.getDescription());
             preparedStatement.setString(7, product.getImage());
             preparedStatement.setInt(8, product.getCategory().getId());
@@ -44,7 +44,7 @@ public class ProductService implements IProductService<Product> {
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getUnit());
             preparedStatement.setDouble(4, product.getWeight());
-            preparedStatement.setInt(5, product.getPrice());
+            preparedStatement.setDouble(5, product.getPrice());
             preparedStatement.setString(6, product.getDescription());
             preparedStatement.setString(7, product.getImage());
             preparedStatement.setInt(8, product.getCategory().getId());
@@ -80,7 +80,59 @@ public class ProductService implements IProductService<Product> {
                 String brand = resultSet.getString("brand");
                 String unit = resultSet.getString("unit");
                 int weight = resultSet.getInt("weight");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String image = resultSet.getString("image");
+                int idCategory = resultSet.getInt("idCategory");
+                String nameCategory = resultSet.getString("nameCategory");
+                Category category = new Category(idCategory, nameCategory);
+                Product product = new Product(id, name, brand, unit, weight, price, description, image, category);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return productList;
+    }
+    public List<Product> findAllByASC() {
+        List<Product> productList = new ArrayList<>();
+        String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory order by product.price;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String brand = resultSet.getString("brand");
+                String unit = resultSet.getString("unit");
+                int weight = resultSet.getInt("weight");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String image = resultSet.getString("image");
+                int idCategory = resultSet.getInt("idCategory");
+                String nameCategory = resultSet.getString("nameCategory");
+                Category category = new Category(idCategory, nameCategory);
+                Product product = new Product(id, name, brand, unit, weight, price, description, image, category);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return productList;
+    }
+    public List<Product> findAllByDESC() {
+        List<Product> productList = new ArrayList<>();
+        String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory order by product.price DESC;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String brand = resultSet.getString("brand");
+                String unit = resultSet.getString("unit");
+                int weight = resultSet.getInt("weight");
+                double price = resultSet.getDouble("price");
                 String description = resultSet.getString("description");
                 String image = resultSet.getString("image");
                 int idCategory = resultSet.getInt("idCategory");

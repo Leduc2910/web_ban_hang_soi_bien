@@ -14,12 +14,6 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<c:url value='/css/home.css'/>"/>
 </head>
 <body>
@@ -55,7 +49,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <c:forEach items="${listCategory}" var="category">
-                            <a class="dropdown-item my-dropdown-item" href="#">
+                            <a class="dropdown-item my-dropdown-item" href="/product?action=category&id=${category.id}">
                                 <img src="${category.image}">
                                 <span>${category.name}</span>
                             </a>
@@ -69,15 +63,49 @@
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
-            <a class="navbar-login" href="/account?action=login">
-                <div class="login_icon">
-                    <i class="fa-regular fa-circle-user"></i>
-                </div>
-                <div class="login-text">
-                    <span style="margin-bottom: 3px">Đăng nhập</span>
-                    <span>Đăng ký</span>
-                </div>
-            </a>
+            <c:choose>
+                <c:when test="${account != null}">
+                    <div class="navbar-login">
+                        <button class="login_icon dropdown-login" type="button" data-toggle="dropdown"
+                                style="color: #a0a3ad;">
+                            <i class="fa-regular fa-circle-user"></i>
+                        </button>
+                        <div class="dropdown-menu" style="top:20px">
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <span>Thông tin tài khoản</span>
+                            </a>
+                            <a class="dropdown-item my-dropdown-item fix-dropdown" href="#" style="margin-top: 10px">
+                                <i class="fa-regular fa-clipboard"></i>
+                                <span>Quản lý đơn hàng</span>
+                            </a>
+                            <c:if test="${account.role == 1}">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Quản lý</span>
+                                </a>
+                            </c:if>
+                            <div class="dropdown-item my-dropdown-item fix-dropdown">
+                                <a type="submit" class="btn btn-success my-btn" style="margin-top: 10px"
+                                   href="/account?action=logout">Đăng xuất</a>
+                            </div>
+                        </div>
+                        <div class="login-text">
+                            <span style="margin-bottom: 3px">Xin chào,</span>
+                            <span style="color: black">${account.fullName}</span>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise> <a class="navbar-login" href="/account?action=login">
+                    <div class="login_icon">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </div>
+                    <div class="login-text">
+                        <span style="margin-bottom: 3px">Đăng nhập</span>
+                        <span>Đăng ký</span>
+                    </div>
+                </a></c:otherwise>
+            </c:choose>
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
@@ -99,16 +127,17 @@
         <div class="detail-product">
             <div class="d-product">
                 <div class="image">
-                    <img src="https://lh3.googleusercontent.com/NVQReUdqdwDIyK23lpJzt_eFHWXLB3bm1HgwjgnUtw-4dKXLMo7eEr5iiMECANiPa_6sNHt5OXktfxiq3qdm9SmVazLezgKc=rw"
+                    <img src="${product.image}"
                          alt="" style="width: 100%">
                 </div>
                 <div class="info">
-                    <span class="info-name">${product.name}</span>
-                    <span class="info-brand">Thương hiệu ${product.brand}</span>
-                    <span class="info-unit">Đơn vị tính ${product.unit}</span>
-                    <span class="info-weight">KHỐI LƯỢNG ${product.weight} KG</span>
-                    <span class="info-price"><fmt:setLocale value="vi_VN"/>
-                        <fmt:formatNumber value="${product.price}" type="currency"/></span>
+                    <div class="info-name">${product.name}</div>
+                    <div class="info-brand">Thương hiệu ${product.brand}</div>
+                    <div class="info-unit">Đơn vị tính ${product.unit}</div>
+                    <div class="info-weight">KHỐI LƯỢNG ${product.weight} KG</div>
+                    <div class="info-price"><fmt:setLocale value="vi_VN"/>
+                        <fmt:formatNumber value="${product.price}" type="currency"/></div>
+                    <div class="border-top"></div>
                     <div class="info-button">
                         <button class="buy-now">MUA NGAY</button>
                         <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
@@ -155,6 +184,13 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+<script src="/javascript/main.js"></script>
 </body>
 </html>
 

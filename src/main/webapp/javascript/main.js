@@ -31,4 +31,12 @@ $(document).ready(function () {
     });
 });
 
-/*modal show*/
+/*add product*/
+function addProduct() {
+    let quantity = +(document.getElementById("quantityCart").value);
+    document.getElementById("quantityCart").value = ++quantity;
+}
+function minProduct() {
+    let quantity = +(document.getElementById("quantityCart").value);
+    document.getElementById("quantityCart").value = --quantity;
+}

@@ -27,7 +27,62 @@ public class ProductController extends HttpServlet {
             case "detail":
                 showProductDetail(req, resp);
                 break;
+            case "category":
+                showAllProductCategory(req, resp);
+                break;
+            case "ascending":
+                showAllProductCategoryByASC(req, resp);
+                break;
+            case "descending":
+                showAllProductCategoryByDESC(req, resp);
+                break;
         }
+    }
+
+    private void showAllProductCategoryByDESC(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Category c : categoryService.findAll()) {
+            if (c.getId() == id) {
+                req.setAttribute("category", c);
+            }
+        }
+        List<Product> products = productService.findAllByDESC();
+        req.setAttribute("listProduct", products);
+        List<Category> categoryList = categoryService.findAll();
+        req.setAttribute("listCategory", categoryList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("product/productCategory.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
+    private void showAllProductCategoryByASC(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Category c : categoryService.findAll()) {
+            if (c.getId() == id) {
+                req.setAttribute("category", c);
+            }
+        }
+        List<Product> products = productService.findAllByASC();
+        req.setAttribute("listProduct", products);
+        List<Category> categoryList = categoryService.findAll();
+        req.setAttribute("listCategory", categoryList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("product/productCategory.jsp");
+        requestDispatcher.forward(req, resp);
+
+    }
+
+    private void showAllProductCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        for (Category c : categoryService.findAll()) {
+            if (c.getId() == id) {
+                req.setAttribute("category", c);
+            }
+        }
+        List<Product> products = productService.findAll();
+        req.setAttribute("listProduct", products);
+        List<Category> categoryList = categoryService.findAll();
+        req.setAttribute("listCategory", categoryList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("product/productCategory.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     private void showProductDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,20 +1,3 @@
-<%--
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<form action="/account?action=register" method="post">
-    <input type="text" name="fullName" placeholder="Full Name">
-    <input type="text" name="phoneNumber" placeholder="Phone Number">
-    <input type="text" name="password" placeholder="Password">
-    <button type="submit">Đăng ký</button>
-</form>
-</body>
-</html>
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,12 +14,6 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<c:url value='/css/home.css'/>"/>
 </head>
 <body>
@@ -114,12 +91,21 @@
             <h5>Chào mừng bạn đã đến với Công ty cổ phẩn Sói Biển Trung Thực!</h5>
             <div class="login-request">Sử dụng số điện thoại để Đăng nhập hoặc Đăng ký tài khoản của bạn</div>
             <form action="/account?action=register" method="post">
-                <input type="text" placeholder="Nhập họ và tên" name="fullName">
-                <input type="text" placeholder="Nhập số điện thoại" name="phoneNumber">
-                <input type="password" placeholder="Nhập mật khẩu" name="password">
-                <div class="login-btn">
-                    <button type="submit" class="btn btn-success my-btn">Đăng ký</button>
-                </div>
+                    <c:if test="${error != null}">
+                        <div style="color: red;margin-top:5px">${error}</div>
+                    </c:if>
+                    <input type="text" placeholder="Nhập họ và tên" name="fullName" id="fullName" >
+                    <c:if test="${error1 != null}">
+                        <div style="color: red;margin-top:5px">${error1}</div>
+                    </c:if>
+                    <input type="text" placeholder="Nhập số điện thoại" name="phoneNumber" id="phoneNumber">
+                    <c:if test="${error2 != null}">
+                        <div style="color: red;margin-top:5px">${error2}</div>
+                    </c:if>
+                    <input type="password" placeholder="Nhập mật khẩu" name="password" id="password">
+                    <div class="login-btn">
+                        <button type="submit" class="btn btn-success my-btn">Đăng ký</button>
+                    </div>
             </form>
         </div>
         <div class="wrapper-warning">
@@ -144,6 +130,12 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
 </body>
 </html>
 

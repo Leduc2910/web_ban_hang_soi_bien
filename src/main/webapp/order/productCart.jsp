@@ -121,48 +121,73 @@
         </div>
     </div>
     <div class="href-product my-row">
-        <a href="/home?action=home">Trang chủ</a> > ${category.name}
+        <a href="/home?action=home">Trang chủ</a> > Giỏ hàng
     </div>
     <div class="wrapper my-row">
-        <div class="product-category">
-            <div class="left-side">
+        <div class="wrapper-cart">
+            <div class="wrapper-cart-top">
+                <span>Giỏ hàng</span>
+                <button>Xóa tất cả</button>
+            </div>
+            <div class="wrapper-cart-bot">
+                <div class="cart-bot-left">
+                    <div class="car-left-top">
+                        <input type="checkbox">
+                        <div class="c-brand">Sói Biển</div>
+                        <div class="c-price">Đơn giá</div>
+                        <div class="c-quantity">Số lượng</div>
+                        <div class="c-total">Thành Tiền</div>
+                    </div>
+                    <div class="cart-left-bot">
+                        <div class="cart-product">
+                            <div class="product-check"><input type="checkbox"></div>
+                            <div class="product-img"><img src="https://lh3.googleusercontent.com/Q0YklUXpjbxplTlMKPnfF48TGWanhH3F1NwZ9Fqihd06HBWwbxcmAUBduchRfXvzOcZjiBcjdLPwrCuE3bQPywJBng_00cc=rw"
+                                                          alt=""></div>
+                            <div class="c-product-info">
+                                <div class="cp-name">Su su hữu cơ</div>
+                                <div class="cp-unit">Đơn vị tính: Kg</div>
+                            </div>
+                            <span class="c-product-price">43.000đ</span>
+                            <div class="c-product-quatity">
+                                <div class="pq-select">
+                                    <button class="pq-decre" onclick="minProduct()"><i class="fa-solid fa-minus"></i></button>
+                                    <input type="text" value="1" style="text-align: center" id="quantityCart">
+                                    <button class="pq-incre" onclick="addProduct()"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <button class="pq-delete">Xóa</button>
+                            </div>
+                            <span class="c-product-total">43.000đ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-bot-right">
+                    <div class="top-voucher">
+                        <div class="voucher-option">
+                            <h6>Khuyến mãi</h6>
+                            <a href=""><i class="fa-solid fa-ticket"></i> Chọn hoặc nhập khuyến mãi </a>
+                        </div>
+                        <div class="voucher-info">Đơn hàng chưa đủ điều kiện áp dụng khuyến mãi. Vui lòng mua thêm để áp dụng</div>
+                    </div>
+                    <div class="bill-total">
+                        <h6>Thanh toán</h6>
+                        <div class="bill-temporary">
+                            <div class="temporary-price">
+                                <span>Tổng tạm tính</span>
+                                <span>43.000 đ</span>
+                            </div>
+                            <div class="into-monery">
+                                <span>Thành tiền</span>
+                                <span style="font-weight: bold">43.000 đ</span>
+                            </div>
+                            <div class="bill-confirm">
+                                <button>THANH TOÁN</button>
+                                <a href="">Bạn cần đăng nhập để tiếp tục</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            </div>
-            <div class="main-side">
-                <div class="main-option">
-                    <span class="title">Sắp xếp theo</span>
-                    <div class="option">
-                        <a class="btn btn-outline-secondary" href="/product?action=ascending&id=${category.id}">Giá tăng dần</a>
-                    </div>
-                    <div class="option">
-                        <a class="btn btn-outline-secondary" href="/product?action=descending&id=${category.id}">Giá giảm dần</a>
-                    </div>
-                </div>
-                <div class="main-product">
-                    <c:forEach var="product" items="${listProduct}">
-                        <c:if test="${product.category.id == category.id}">
-                            <a href="/product?action=detail&id=${product.id}" class="product">
-                                <img src="${product.image}"
-                                     alt="">
-                                <div class="p-brand">
-                                        ${product.brand}
-                                </div>
-                                <div class="p-name">
-                                        ${product.name}
-                                </div>
-                                <div class="p-unit">
-                                    Đơn vị tính: ${product.unit}
-                                </div>
-                                <div class="p-price">
-                                    <fmt:setLocale value="vi_VN"/>
-                                    <fmt:formatNumber value="${product.price}" type="currency"/>
-                                </div>
-                                <button class="product-btn">Thêm vào giỏ</button>
-                            </a>
-                        </c:if>
-                    </c:forEach>
-                </div>
-            </div>
         </div>
     </div>
     <div id="footer">
@@ -187,7 +212,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-<script src="/javascript/main.js"></script>
+<script  src="<c:url value='/javascript/main.js'/>"></script>
 </body>
 </html>
 

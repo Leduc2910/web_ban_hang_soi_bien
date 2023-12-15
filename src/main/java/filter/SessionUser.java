@@ -1,5 +1,7 @@
 package filter;
 
+import model.Account;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,16 @@ public class SessionUser {
         if (session != null) {
             if (session.getAttribute("fullName") != null) {
                 return (String) session.getAttribute("fullName");
+            }
+        }
+        return null;
+    }
+
+    public static Account getUserSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            if (session.getAttribute("account") != null) {
+                return (Account) session.getAttribute("account");
             }
         }
         return null;
