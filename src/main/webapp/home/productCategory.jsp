@@ -132,19 +132,29 @@
             <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
         </div>
         <div class="wrapper-category">
-            <a class="category" href="/home?action=home" style="background-color: rgba(255,193,7,1)">
+            <a class="category" href="/home?action=home">
                 <img src="https://lh3.googleusercontent.com/Vv4QFdO86gY1PuydiHxlYKbp1TylcipH5xKdPV5A3siNSH-s8-l6xFM4xZUkxqgr8n5i1UWY11WI-NhFjIZrvrcBfRfD3PI=rw">
                 <span>Độc quyền tại sói biển</span>
             </a>
             <c:forEach items="${listCategory}" var="category">
-                <a class="category" href="/home?action=category&id=${category.id}">
-                    <img src="${category.image}">
-                    <span>${category.name}</span>
-                </a>
+                <c:choose>
+                    <c:when test="${category.id == idCategory}">
+                        <a class="category" href="/home?action=category&id=${category.id}" style="background-color: rgba(255,193,7,1)">
+                            <img src="${category.image}">
+                            <span>${category.name}</span>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="category" href="/home?action=category&id=${category.id}">
+                            <img src="${category.image}">
+                            <span>${category.name}</span>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </div>
         <div class="wrapper-product">
-            <c:forEach items="${listProduct}" var="product">
+            <c:forEach items="${productCategory}" var="product">
                 <a href="/product?action=detail&id=${product.id}" class="product">
                     <img src="${product.image}" alt="">
                     <div class="p-brand">

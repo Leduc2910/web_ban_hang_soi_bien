@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: min
-  Date: 01/12/2023
-  Time: 7:58 CH
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -127,42 +120,49 @@
             </div>
         </div>
     </div>
+    <div class="href-product my-row">
+        <a href="/home?action=home">Trang chủ</a> > ${category.name}
+    </div>
     <div class="wrapper my-row">
-        <div class="wrapper-title ">
-            <h4 style="font-weight: 650; padding: 16px 0 16px 16px">Danh mục sản phẩm</h4>
-        </div>
-        <div class="wrapper-category">
-            <a class="category" href="/home?action=home" style="background-color: rgba(255,193,7,1)">
-                <img src="https://lh3.googleusercontent.com/Vv4QFdO86gY1PuydiHxlYKbp1TylcipH5xKdPV5A3siNSH-s8-l6xFM4xZUkxqgr8n5i1UWY11WI-NhFjIZrvrcBfRfD3PI=rw">
-                <span>Độc quyền tại sói biển</span>
-            </a>
-            <c:forEach items="${listCategory}" var="category">
-                <a class="category" href="/home?action=category&id=${category.id}">
-                    <img src="${category.image}">
-                    <span>${category.name}</span>
-                </a>
-            </c:forEach>
-        </div>
-        <div class="wrapper-product">
-            <c:forEach items="${listProduct}" var="product">
-                <a href="/product?action=detail&id=${product.id}" class="product">
-                    <img src="${product.image}" alt="">
-                    <div class="p-brand">
-                            ${product.brand}
+        <div class="product-category">
+            <div class="left-side">
+
+            </div>
+            <div class="main-side">
+                <div class="main-option">
+                    <span class="title">Sắp xếp theo</span>
+                    <div class="option">
+                        <a class="btn btn-outline-secondary" href="/product?action=ascending&id=${category.id}">Giá tăng dần</a>
                     </div>
-                    <div class="p-name">
-                            ${product.name}
+                    <div class="option">
+                        <a class="btn btn-outline-secondary" href="/product?action=descending&id=${category.id}">Giá giảm dần</a>
                     </div>
-                    <div class="p-unit">
-                        Đơn vị tính: ${product.unit}
-                    </div>
-                    <div class="p-price">
-                        <fmt:setLocale value="vi_VN"/>
-                        <fmt:formatNumber value="${product.price}" type="currency"/>
-                    </div>
-                    <button class="product-btn">Thêm vào giỏ</button>
-                </a>
-            </c:forEach>
+                </div>
+                <div class="main-product">
+                    <c:forEach var="product" items="${listProduct}">
+                        <c:if test="${product.category.id == category.id}">
+                            <a href="/product?action=detail&id=${product.id}" class="product">
+                                <img src="${product.image}"
+                                     alt="">
+                                <div class="p-brand">
+                                        ${product.brand}
+                                </div>
+                                <div class="p-name">
+                                        ${product.name}
+                                </div>
+                                <div class="p-unit">
+                                    Đơn vị tính: ${product.unit}
+                                </div>
+                                <div class="p-price">
+                                    <fmt:setLocale value="vi_VN"/>
+                                    <fmt:formatNumber value="${product.price}" type="currency"/>
+                                </div>
+                                <button class="product-btn">Thêm vào giỏ</button>
+                            </a>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
     </div>
     <div id="footer">
