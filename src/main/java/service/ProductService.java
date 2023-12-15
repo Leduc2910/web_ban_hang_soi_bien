@@ -23,7 +23,7 @@ public class ProductService implements IProductService<Product> {
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getUnit());
             preparedStatement.setDouble(4, product.getWeight());
-            preparedStatement.setInt(5, product.getPrice());
+            preparedStatement.setDouble(5, product.getPrice());
             preparedStatement.setString(6, product.getDescription());
             preparedStatement.setString(7, product.getImage());
             preparedStatement.setInt(8, product.getCategory().getId());
@@ -44,7 +44,7 @@ public class ProductService implements IProductService<Product> {
             preparedStatement.setString(2, product.getBrand());
             preparedStatement.setString(3, product.getUnit());
             preparedStatement.setDouble(4, product.getWeight());
-            preparedStatement.setInt(5, product.getPrice());
+            preparedStatement.setDouble(5, product.getPrice());
             preparedStatement.setString(6, product.getDescription());
             preparedStatement.setString(7, product.getImage());
             preparedStatement.setInt(8, product.getCategory().getId());
@@ -80,7 +80,7 @@ public class ProductService implements IProductService<Product> {
                 String brand = resultSet.getString("brand");
                 String unit = resultSet.getString("unit");
                 int weight = resultSet.getInt("weight");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
                 String description = resultSet.getString("description");
                 String image = resultSet.getString("image");
                 int idCategory = resultSet.getInt("idCategory");
@@ -106,7 +106,7 @@ public class ProductService implements IProductService<Product> {
                 String brand = resultSet.getString("brand");
                 String unit = resultSet.getString("unit");
                 int weight = resultSet.getInt("weight");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
                 String description = resultSet.getString("description");
                 String image = resultSet.getString("image");
                 int idCategory = resultSet.getInt("idCategory");
@@ -132,7 +132,7 @@ public class ProductService implements IProductService<Product> {
                 String brand = resultSet.getString("brand");
                 String unit = resultSet.getString("unit");
                 int weight = resultSet.getInt("weight");
-                int price = resultSet.getInt("price");
+                double price = resultSet.getDouble("price");
                 String description = resultSet.getString("description");
                 String image = resultSet.getString("image");
                 int idCategory = resultSet.getInt("idCategory");

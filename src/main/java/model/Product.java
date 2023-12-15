@@ -6,12 +6,12 @@ public class Product {
     private String brand;
     private String unit;
     private double weight;
-    private int price;
+    private double price;
     private String description;
     private String image;
     private Category category;
 
-    public Product(int id, String name, String brand, String unit, double weight, int price, String description, String image, Category category) {
+    public Product(int id, String name, String brand, String unit, double weight, double price, String description, String image, Category category) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -23,7 +23,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(String name, String brand, String unit, double weight, int price, String description, String image, Category category) {
+    public Product(String name, String brand, String unit, double weight, double price, String description, String image, Category category) {
         this.name = name;
         this.brand = brand;
         this.unit = unit;
@@ -74,11 +74,11 @@ public class Product {
         this.weight = weight;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

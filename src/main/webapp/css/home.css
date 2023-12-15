@@ -372,7 +372,7 @@ body {
     width: 400px;
     height: 40px;
     padding: 10px 10px;
-    margin-top: 15px;
+    margin-top: 16px;
     border-radius: 4px;
     outline: none;
     border: 1px solid green;
@@ -455,13 +455,12 @@ body {
     flex-direction: column;
     width: 60%;
 }
-
 .info .info-name {
     color: black;
     font-weight: 550;
+    height: 30px;
     font-size: 26px;
 }
-
 .info .info-brand {
     color: rgb(130, 134, 158);
     height: 30px;
@@ -495,11 +494,6 @@ body {
     flex-direction: row;
     width: 100%;
     margin-top: 40px;
-}
-
-.info .border-top {
-    border: 1px solid #a1a0a0;
-    width: 100%;
 }
 
 .info-button .buy-now {
@@ -541,18 +535,15 @@ body {
     flex-direction: row;
     align-items: center;
 }
-
 .logo-web img {
     width: 40px;
     border-radius: 50%;
 }
-
 .logo-web span {
     margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
 }
-
 .right-side .detail-web {
     width: 100%;
     background-color: white;
@@ -562,11 +553,9 @@ body {
     flex-direction: column;
     padding: 10px 10px;
 }
-
 .detail-web span {
     margin: 0 0 10px 10px
 }
-
 .description-product {
     width: 100%;
     background-color: white;
@@ -575,7 +564,6 @@ body {
     flex-direction: column;
     padding: 20px 20px;
 }
-
 .description-product h4 {
     margin-bottom: 30px;
 }
@@ -650,4 +638,265 @@ body {
 .dropdown-login {
     background-color: unset;
     border: none;
+}
+
+.wrapper-cart{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: #f8f8fc;
+}
+.wrapper-cart-top{
+    display: flex;
+    padding: 0 0 16px;
+}
+.wrapper-cart-top span{
+    font-weight: 700;
+    font-size: x-large;
+    padding-right: 645px;
+}
+.wrapper-cart-top button{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: rgb(0, 106, 20);
+}
+.wrapper-cart-top button:hover{
+
+    color:red;
+}
+.wrapper-cart-bot{
+    display: flex;
+    width: 100%;
+    height: 600px;
+}
+.cart-bot-left{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    width: 70%;
+    height: auto;
+}
+.car-left-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px;
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    font-weight: 645;
+
+}
+.cart-left-top input{
+    width: 10%;
+}
+
+.c-brand{
+    font-size: 15px;
+    text-align: left;
+    width: 48%;
+    padding-left: 15px;
+}
+.c-price{
+    font-size: 13px;
+    text-align: right;
+    width: 17%;
+    /*margin-left: 50px;*/
+}
+.c-quantity{
+    font-size: 13px;
+    text-align: center;
+    width: 16%;
+    padding-left: 20px;
+}
+.c-total{
+    font-size: 13px;
+    text-align: right;
+    width: 17%;
+}
+
+.cart-left-bot{
+    background-color: white;
+    margin-top: 3px;
+    width: 100%;
+    height: auto;
+}
+.cart-product{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 118px;
+    padding: 16px;
+}
+.product-check{
+    width: 4%;
+    text-align: left;
+}
+.product-img{
+    width: 10%;
+}
+.cart-product img{
+    width: 80px;
+    height: 80px;
+    border: 1px solid #d3d3d7;
+}
+.c-product-info{
+    width: 36%;
+    padding-left: 15px;
+}
+.cp-name{
+    font-size: 13px;
+    color: #434657;
+}
+.cp-sku {
+    font-size: 12px;
+    color: #82869E;
+}
+.c-product-info .cp-unit{
+    font-size: 12px;
+    color: #82869E;
+}
+.c-product-price{
+    width: 17%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: right;
+}
+.c-product-quatity{
+    width: 16%;
+    padding-left: 20px;
+
+}
+.pq-select{
+    border-radius: 4px;
+    border: 1px solid #82869E;
+    height: 32px;
+    text-align: center;
+    background-color: whitesmoke;
+}
+.pq-select input{
+    width: 30px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+.pq-incre{
+    width: 30px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    opacity: 30%;
+}
+.pq-decre{
+    width: 30px;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    opacity: 30%;
+}
+.pq-delete{
+    color: blue;
+    font-size: 13px;
+    width: 100%;
+    height: 32px;
+    border: none;
+    outline: none;
+    background-color: white;
+    padding: 12px 0 0;
+    text-align: center;
+}
+.c-product-total{
+    font-size: 17px;
+    font-weight: bold;
+    text-align: right;
+    width: 17%;
+}
+
+.cart-bot-right{
+    border-radius: 10px;
+    width: 30%;
+    height: 100%;
+    margin-left: 15px;
+    background-color: transparent;
+}
+.top-voucher{
+    padding: 16px;
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+    background-color: white;
+}
+.voucher-option{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.voucher-option h6{
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.voucher-option a{
+    font-size: 14px;
+}
+.voucher-info{
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 50%;
+}
+
+.bill-total{
+    border-radius: 10px;
+    height: 180px;
+    margin: 16px 0 0 ;
+    background-color: white;
+    padding: 16px;
+}
+.bill-total h6{
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+.bill-temporary{
+    padding: 10px 0;
+}
+.temporary-price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    height: 25px;
+}
+.into-monery{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    height: 25px;
+}
+.bill-confirm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0 0;
+    border-radius: 5px;
+    padding: 7px 16px;
+    border-color: rgb(0, 101, 69);
+    background-color: rgb(0, 101, 69);
+}
+.bill-confirm button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+}
+.bill-confirm a{
+    background-color: transparent;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
 }
