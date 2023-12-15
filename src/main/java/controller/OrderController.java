@@ -33,6 +33,10 @@ public class OrderController extends HttpServlet {
     }
 
     private void showFormCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Category> categoryList = categoryService.findAll();
+        req.setAttribute("listCategory", categoryList);
+        Account account = SessionUser.getUserSession(req);
+        req.setAttribute("account", account);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("order/productCart.jsp");
         requestDispatcher.forward(req, resp);
     }
