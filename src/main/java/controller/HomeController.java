@@ -65,6 +65,9 @@ public class HomeController extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/index.jsp");
         requestDispatcher.forward(req, resp);
     }
+    private void showDetaiProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+    }
 
 
     @Override
