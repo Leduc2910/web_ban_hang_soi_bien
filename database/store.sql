@@ -55,7 +55,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`id`),
   KEY `FK_OrderUser` (`idUser`),
   CONSTRAINT `FK_OrderUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +64,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,1,459000,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +116,7 @@ CREATE TABLE `orderitem` (
   KEY `FK_OrderItemProduct` (`idProduct`),
   CONSTRAINT `FK_OrderItemOrder` FOREIGN KEY (`idOrder`) REFERENCES `order` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_OrderItemProduct` FOREIGN KEY (`idProduct`) REFERENCES `product` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +125,7 @@ CREATE TABLE `orderitem` (
 
 LOCK TABLES `orderitem` WRITE;
 /*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
+INSERT INTO `orderitem` VALUES (13,1,5,1,459000);
 /*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,20 +136,19 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product`
-(
-    `id`          int          NOT NULL AUTO_INCREMENT,
-    `name`        varchar(255) NOT NULL,
-    `brand`       varchar(255) NOT NULL,
-    `unit`        varchar(50)  NOT NULL,
-    `weight` double NOT NULL,
-    `price`       double DEFAULT '0',
-    `description` text         NOT NULL,
-    `image`       text         NOT NULL,
-    `idCategory`  int          null,
-    PRIMARY KEY (`id`),
-    KEY           `idCategory` (`idCategory`),
-    CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idCategory`) REFERENCES `category` (`id`)
+CREATE TABLE `product` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `brand` varchar(255) NOT NULL,
+  `unit` varchar(50) NOT NULL,
+  `weight` double NOT NULL,
+  `price` double DEFAULT '0',
+  `description` text NOT NULL,
+  `image` text NOT NULL,
+  `idCategory` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idCategory` (`idCategory`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idCategory`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -183,16 +184,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-LOCK
-TABLES `user` WRITE;
+LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user`
-VALUES (1, '0936759690', 'mihduc2910', 1, 'Lê Minh Đức'),
-       (2, '0123456789', 'doande2002', 0, 'Doãn Đình Đề'),
-       (4, '1111111111', 'tronghieu', 1, 'Nguyễn Trọng Hiếu');
+INSERT INTO `user` VALUES (1,'0936759690','mihduc2910',1,'Lê Minh Đức'),(2,'0123456789','doande2002',0,'Doãn Đình Đề'),(4,'1111111111','tronghieu',1,'Nguyễn Trọng Hiếu');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK
-TABLES;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -203,4 +199,4 @@ TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-13 13:14:11
+-- Dump completed on 2023-12-16 23:08:18
