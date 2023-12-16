@@ -15,6 +15,14 @@ public class OrderItem {
         this.totalPrice = totalPrice;
     }
 
+    public OrderItem(int idOrder, int idProduct, int quantity, double totalPrice) {
+
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
     public int getId() {
         return id;
     }

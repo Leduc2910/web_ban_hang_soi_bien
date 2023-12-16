@@ -12,6 +12,11 @@ public class Order {
         this.totalPrice = totalPrice;
         this.statusCart = statusCart;
     }
+    public Order( int idUser, double totalPrice, int statusCart) {
+        this.idUser = idUser;
+        this.totalPrice = totalPrice;
+        this.statusCart = statusCart;
+    }
 
     public int getId() {
         return id;

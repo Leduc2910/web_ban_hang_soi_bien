@@ -75,7 +75,7 @@
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
-            <div class="navbar_cart">
+            <a class="navbar_cart" href="/order?action=cart">
                 <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
@@ -83,7 +83,7 @@
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="wrapper1">

@@ -14,9 +14,34 @@ import java.util.List;
 public class ProductService implements IProductService<Product> {
     private Connection connection = ConnectToMySQL.getConnection();
 
+    public Product getProductWithID(int id) {
+        String sql = "select * from product where id = " + id;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String brand = resultSet.getString("brand");
+                String unit = resultSet.getString("unit");
+                double weight = resultSet.getDouble("weight");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String img = resultSet.getString("image");
+                int idCate = resultSet.getInt("idCategory");
+                Category category = new Category(idCate);
+                Product product = new Product(id, name, brand, unit, weight, price, description, img, category);
+                return product;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
     @Override
     public void add(Product product) {
-    String sql = "insert into product(name, brand, unit, weight, price, description, image, idcategory) values (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "insert into product(name, brand, unit, weight, price, description, image, idcategory) values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, product.getName());
@@ -36,7 +61,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public void edit(int id, Product product) {
-    String sql = "update  product set name = ?, brand = ?, unit = ?, weight = ?, price = ?, description = ?, image = ?, idCategory = ? where id = ?;";
+        String sql = "update  product set name = ?, brand = ?, unit = ?, weight = ?, price = ?, description = ?, image = ?, idCategory = ? where id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(9, id);
@@ -56,7 +81,7 @@ public class ProductService implements IProductService<Product> {
 
     @Override
     public void delete(int id) {
-    String sql = "delete from product where id = ?;";
+        String sql = "delete from product where id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -74,7 +99,7 @@ public class ProductService implements IProductService<Product> {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String brand = resultSet.getString("brand");
@@ -94,13 +119,14 @@ public class ProductService implements IProductService<Product> {
         }
         return productList;
     }
+
     public List<Product> findAllByASC() {
         List<Product> productList = new ArrayList<>();
         String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory order by product.price;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String brand = resultSet.getString("brand");
@@ -120,13 +146,14 @@ public class ProductService implements IProductService<Product> {
         }
         return productList;
     }
+
     public List<Product> findAllByDESC() {
         List<Product> productList = new ArrayList<>();
         String sql = "select product.*, c.name as nameCategory from product join category c on c.id = product.idCategory order by product.price DESC;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String brand = resultSet.getString("brand");

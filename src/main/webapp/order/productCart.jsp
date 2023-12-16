@@ -80,7 +80,8 @@
                                 <span>Quản lý đơn hàng</span>
                             </a>
                             <c:if test="${account.role == 1}">
-                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home"
+                                   style="margin-top: 10px">
                                     <i class="fa-solid fa-list-check"></i>
                                     <span>Quản lý</span>
                                 </a>
@@ -109,7 +110,7 @@
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
-            <div class="navbar_cart">
+            <a class="navbar_cart" href="/order?action=cart">
                 <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
@@ -117,47 +118,66 @@
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="href-product my-row">
-        <a href="/home?action=home">Trang chủ</a> > Giỏ hàng
+        <a href="/home?action=home">Trang chủ</a> > <b>Giỏ hàng</b>
     </div>
     <div class="wrapper my-row">
         <div class="wrapper-cart">
             <div class="wrapper-cart-top">
                 <span>Giỏ hàng</span>
-                <button>Xóa tất cả</button>
+                <form action="/order?action=deleteAllOrderItem" method="post">
+                    <button type="submit" href="/order?action=deleteAllOrderItem">Xóa tất cả</button>
+                </form>
             </div>
             <div class="wrapper-cart-bot">
                 <div class="cart-bot-left">
                     <div class="car-left-top">
-                        <input type="checkbox">
                         <div class="c-brand">Sói Biển</div>
                         <div class="c-price">Đơn giá</div>
                         <div class="c-quantity">Số lượng</div>
                         <div class="c-total">Thành Tiền</div>
                     </div>
                     <div class="cart-left-bot">
-                        <div class="cart-product">
-                            <div class="product-check"><input type="checkbox"></div>
-                            <div class="product-img"><img src="https://lh3.googleusercontent.com/Q0YklUXpjbxplTlMKPnfF48TGWanhH3F1NwZ9Fqihd06HBWwbxcmAUBduchRfXvzOcZjiBcjdLPwrCuE3bQPywJBng_00cc=rw"
-                                                          alt=""></div>
-                            <div class="c-product-info">
-                                <div class="cp-name">Su su hữu cơ</div>
-                                <div class="cp-unit">Đơn vị tính: Kg</div>
-                            </div>
-                            <span class="c-product-price">43.000đ</span>
-                            <div class="c-product-quatity">
-                                <div class="pq-select">
-                                    <button class="pq-decre" onclick="minProduct()"><i class="fa-solid fa-minus"></i></button>
-                                    <input type="text" value="1" style="text-align: center" id="quantityCart">
-                                    <button class="pq-incre" onclick="addProduct()"><i class="fa-solid fa-plus"></i></button>
-                                </div>
-                                <button class="pq-delete">Xóa</button>
-                            </div>
-                            <span class="c-product-total">43.000đ</span>
-                        </div>
+                        <c:forEach items="${lstOrderItem}" var="orderItem">
+                            <c:forEach items="${lstProduct}" var="product">
+                                <c:if test="${orderItem.idProduct == product.id}">
+                                    <div class="cart-product">
+                                        <a class="product-img" href="/product?action=detail&id=${product.id}"><img
+                                                src="${product.image}"
+                                                alt=""></a>
+                                        <a class="c-product-info" href="/product?action=detail&id=${product.id}">
+                                            <div class="cp-name">${product.name}</div>
+                                            <div class="cp-unit">Đơn vị tính: ${product.unit}</div>
+                                        </a>
+                                        <span class="c-product-price">
+                                            <fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber value="${product.price}" type="currency"/></span>
+                                        <div class="c-product-quatity">
+                                            <form action="/order?action=editQuantityItem" method="post">
+                                                <div class="pq-select">
+                                                    <input class="pq-changeQuantity" name="sub" value="-" type="submit">
+                                                    <input type="text" value="${orderItem.quantity}"
+                                                           style="text-align: center"
+                                                           id="quantityCart" disabled>
+                                                    <input class="pq-changeQuantity" name="add" value="+" type="submit">
+                                                </div>
+                                            </form>
+                                            <form action="/order?action=deleteOrderItem" method="post">
+                                                <input type="hidden" name="id" value="${product.id}">
+                                                <button type="submit" class="pq-delete">Xóa</button>
+                                            </form>
+
+                                        </div>
+                                        <span class="c-product-total"><fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber value="${orderItem.totalPrice}" type="currency"/></span>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+
                     </div>
                 </div>
                 <div class="cart-bot-right">
@@ -166,22 +186,21 @@
                             <h6>Khuyến mãi</h6>
                             <a href=""><i class="fa-solid fa-ticket"></i> Chọn hoặc nhập khuyến mãi </a>
                         </div>
-                        <div class="voucher-info">Đơn hàng chưa đủ điều kiện áp dụng khuyến mãi. Vui lòng mua thêm để áp dụng</div>
+                        <div class="voucher-info">Đơn hàng chưa đủ điều kiện áp dụng khuyến mãi. Vui lòng mua thêm để áp
+                            dụng
+                        </div>
                     </div>
                     <div class="bill-total">
                         <h6>Thanh toán</h6>
                         <div class="bill-temporary">
-                            <div class="temporary-price">
-                                <span>Tổng tạm tính</span>
-                                <span>43.000 đ</span>
-                            </div>
-                            <div class="into-monery">
+                            <div class="into-money">
                                 <span>Thành tiền</span>
-                                <span style="font-weight: bold">43.000 đ</span>
+                                <span style="font-weight: bold">
+                                    <fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber value="${order.totalPrice}" type="currency"/></span>
                             </div>
                             <div class="bill-confirm">
-                                <button>THANH TOÁN</button>
-                                <a href="">Bạn cần đăng nhập để tiếp tục</a>
+                                <button>TIẾP TỤC</button>
                             </div>
                         </div>
                     </div>
@@ -212,7 +231,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-<script  src="<c:url value='/javascript/main.js'/>"></script>
+<script src="<c:url value='/javascript/main.js'/>"></script>
 </body>
 </html>
 

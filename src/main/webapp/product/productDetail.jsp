@@ -80,7 +80,8 @@
                                 <span>Quản lý đơn hàng</span>
                             </a>
                             <c:if test="${account.role == 1}">
-                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home"
+                                   style="margin-top: 10px">
                                     <i class="fa-solid fa-list-check"></i>
                                     <span>Quản lý</span>
                                 </a>
@@ -109,7 +110,7 @@
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
-            <div class="navbar_cart">
+            <a class="navbar_cart" href="/order?action=cart">
                 <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
@@ -117,7 +118,7 @@
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="href-product my-row">
@@ -126,7 +127,7 @@
     <div class="wrapper my-row">
         <div class="detail-product">
             <div class="d-product">
-                <div class="image">
+                <div clas2zz="image">
                     <img src="${product.image}"
                          alt="" style="width: 100%">
                 </div>
@@ -138,10 +139,12 @@
                     <div class="info-price"><fmt:setLocale value="vi_VN"/>
                         <fmt:formatNumber value="${product.price}" type="currency"/></div>
                     <div class="border-top"></div>
-                    <div class="info-button">
-                        <button class="buy-now">MUA NGAY</button>
-                        <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
-                    </div>
+                    <form action="/order?action=addToCart" method="post">
+                        <div class="info-button">
+                            <input type="hidden" name="id" value="${product.id}">
+                            <button type="submit" class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="right-side">

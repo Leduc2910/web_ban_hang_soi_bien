@@ -116,7 +116,7 @@
             <div class="navbar-notification">
                 <i class="fa-regular fa-bell"></i>
             </div>
-            <div class="navbar_cart">
+            <a class="navbar_cart" href="/order?action=cart">
                 <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </div>
@@ -124,7 +124,7 @@
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
                     <span>(0) sản phẩm</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="wrapper my-row">
@@ -160,7 +160,10 @@
                         <fmt:setLocale value="vi_VN"/>
                         <fmt:formatNumber value="${product.price}" type="currency"/>
                     </div>
-                    <button class="product-btn">Thêm vào giỏ</button>
+                    <form action="/order?action=addToCart&id=${product.id}" method="post">
+                        <button class="product-btn" type="submit">Thêm vào giỏ</button>
+                    </form>
+
                 </a>
             </c:forEach>
         </div>
