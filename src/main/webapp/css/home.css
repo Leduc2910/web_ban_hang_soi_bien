@@ -75,13 +75,14 @@ body {
     color: black;
 }
 
-.my-dropdown-item img, my-dropdown-item i {
+.my-dropdown-item img, .my-dropdown-item i {
     width: 20px;
     margin-right: 10px;
 }
 
 .my-dropdown-item span {
     font-size: 16px;
+    margin-right: 20px;
 }
 
 .dropdown-menu .my-btn {
@@ -751,9 +752,11 @@ body {
     width: 35%;
     padding-left: 15px;
 }
+
 .c-product-info:hover {
     text-decoration: unset;
 }
+
 .cp-name {
     font-size: 13px;
     color: #434657;
@@ -869,7 +872,7 @@ body {
 
 .bill-total {
     border-radius: 10px;
-    height: 180px;
+    height: auto;
     margin: 16px 0 0;
     background-color: white;
     padding: 16px;
@@ -903,26 +906,192 @@ body {
 
 .bill-confirm {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 16px 0 0;
+    width: 100%;
+}
+
+.bill-confirm a {
+    width: 100%;
+    color: white;
+    font-size: 14px;
     border-radius: 5px;
     padding: 7px 16px;
     border-color: rgb(0, 101, 69);
     background-color: rgb(0, 101, 69);
 }
-
-.bill-confirm button {
-    border: none;
-    outline: none;
-    background-color: transparent;
+.bill-confirm a:hover {
     color: white;
+    text-decoration: unset;
+}
+
+.wrapper-checkout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    background-color: #f8f8fc;
+}
+
+.checkout-left {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    margin-right: 20px;
+}
+
+.checkout-right {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+}
+
+.checkout-head {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    align-items: center;
+}
+
+.head-div {
+    border-bottom: 2px solid rgb(0, 101, 69);
+    height: 100%;
+    padding: 0.7rem 1rem;
+}
+
+.subtitle {
+    font-weight: 500;
+    font-size: 13px;
+    color: rgb(0, 101, 69);
+}
+
+.checkout-form {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 1.5rem 1.5rem;
+    border-radius: 0 0 10px 10px;
+}
+
+.checkout-product {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+}
+
+.checkout-p-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.item-img {
+    width: 25%;
+}
+
+.item-img img {
+    width: 100%;
+    border: 1px solid #efeff1;
+}
+
+.item-info {
+    margin-left: 10px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-name {
+    font-size: 13px;
+    color: black;
+}
+
+.item-name:hover {
+    color: #005b3e;
+    text-decoration: unset;
+}
+
+.item-quantity {
+    font-size: 12px;
+    color: rgb(130, 134, 158);
+    margin-top: 3px;
+}
+
+.item-price {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+.checkout-bill {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 1rem 1rem;
+    margin-top: 20px;
+}
+
+.bill-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 7px;
     font-size: 14px;
 }
 
-.bill-confirm a {
-    background-color: transparent;
+.bill-left {
+    color: rgb(132, 135, 136);
+}
+
+.bill-right {
+    font-weight: 700;
+}
+
+.bill-right-total {
+    color: rgb(235, 33, 1);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.bill-note-right {
+    font-size: 14px;
+    color: rgb(132, 135, 136);
+}
+
+.bill-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    height: auto;
+}
+
+.bill-button button {
+    width: 100%;
     color: white;
-    font-size: 12px;
-    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border-color: rgb(0, 101, 69);
+    background-color: rgb(0, 101, 69);
 }

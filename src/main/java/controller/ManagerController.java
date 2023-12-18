@@ -1,12 +1,9 @@
 package controller;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import filter.SessionUser;
-import model.Account;
-import model.Category;
-import model.Product;
-import service.AccountService;
-import service.CategoryService;
-import service.ProductService;
+import model.*;
+import service.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +19,9 @@ public class ManagerController extends HttpServlet {
     private ProductService productService = new ProductService();
     private CategoryService categoryService = new CategoryService();
     private AccountService accountService = new AccountService();
+    private OrderDetailService orderDetailService = new OrderDetailService();
+    private OrderItemService orderItemService = new OrderItemService();
+    private OrderService orderService = new OrderService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +40,9 @@ public class ManagerController extends HttpServlet {
                 case "managerAccount":
                     showAllAccount(req, resp);
                     break;
+                case "managerOrder":
+                    showAllOrder(req, resp);
+                    break;
                 case "addProduct":
                     showFormAddProduct(req, resp);
                     break;
@@ -52,8 +55,14 @@ public class ManagerController extends HttpServlet {
                 case "editAccount":
                     showFormEditAccount(req, resp);
                     break;
+                case "editOrder":
+                    showFormEditOrder(req, resp);
+                    break;
                 case "detailProduct":
                     showFormDetailProduct(req, resp);
+                    break;
+                case "detailOrder":
+                    showFormDetailOrder(req, resp);
                     break;
                 case "deleteProduct":
                     deleteProduct(req, resp);
@@ -64,10 +73,50 @@ public class ManagerController extends HttpServlet {
                 case "deleteAccount":
                     deleteAccount(req, resp);
                     break;
+                case "deleteOrder":
+                    deleteOrder(req, resp);
+                    break;
             }
         } else {
             resp.sendRedirect("/account?action=login");
         }
+    }
+
+    private void deleteOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        orderDetailService.delete(id);
+        resp.sendRedirect("/admin?action=managerOrder");
+    }
+
+    private void showFormDetailOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        OrderDetail orderDetail = orderDetailService.getOrderDetailByID(id);
+        List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(orderDetail.getIdOrder());
+        List<Product> productList = productService.findAll();
+        req.setAttribute("orderDetail", orderDetail);
+        req.setAttribute("lstOrderItem", orderItemList);
+        req.setAttribute("lstProduct", productList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/detailOrder.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
+    private void showFormEditOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        OrderDetail orderDetail = orderDetailService.getOrderDetailByID(id);
+        List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(orderDetail.getIdOrder());
+        List<Product> productList = productService.findAll();
+        req.setAttribute("orderDetail", orderDetail);
+        req.setAttribute("lstOrderItem", orderItemList);
+        req.setAttribute("lstProduct", productList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/editOrder.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
+    private void showAllOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<OrderDetail> orderDetails = orderDetailService.findAll();
+        req.setAttribute("lstOrderDetail", orderDetails);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/managerOrder.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
 
@@ -210,10 +259,26 @@ public class ManagerController extends HttpServlet {
                 case "editAccount":
                     editAccount(req, resp);
                     break;
+                case "editOrder":
+                    editOrder(req, resp);
+                    break;
             }
         } else {
             resp.sendRedirect("/account?action=login");
         }
+    }
+
+    private void editOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String fullName = req.getParameter("fullName");
+        String address = req.getParameter("address");
+        int status = Integer.parseInt(req.getParameter("status"));
+        OrderDetail orderDetail = orderDetailService.getOrderDetailByID(id);
+        orderDetail.setFullName(fullName);
+        orderDetail.setAddress(address);
+        orderDetail.setStatusOrder(status);
+        orderDetailService.edit(id, orderDetail);
+        resp.sendRedirect("/admin?action=managerOrder");
     }
 
     private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {

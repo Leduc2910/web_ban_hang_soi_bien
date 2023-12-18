@@ -59,6 +59,8 @@
                 <div class="item"><a href="/admin?action=managerAccount"><i
                         class="fa-solid fa-user-group"></i>Account</a>
                 </div>
+                <div class="item"><a href="/admin?action=managerOrder"><i class="fa-solid fa-list-check"></i>Order</a>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -101,8 +103,16 @@
                             <div class="form-group col-md-5">
                                 <label for="inputRole">Role</label>
                                 <select id="inputRole" class="form-control" name="role">
-                                    <option value="1">Admin</option>
-                                    <option value="0" selected>Customer</option>
+                                    <c:choose>
+                                        <c:when test="#{account.role == 1}">
+                                            <option value="1" selected>Admin</option>
+                                            <option value="0">Customer</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="1">Admin</option>
+                                            <option value="0" selected>Customer</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </select>
                             </div>
                             <div class="col-md-3"></div>

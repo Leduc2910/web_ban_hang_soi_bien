@@ -116,7 +116,7 @@
                 </div>
                 <div class="cart-text">
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
-                    <span>(0) sản phẩm</span>
+                    <span>(${count}) sản phẩm</span>
                 </div>
             </a>
         </div>
@@ -156,7 +156,7 @@
                                             <fmt:setLocale value="vi_VN"/>
                                             <fmt:formatNumber value="${product.price}" type="currency"/></span>
                                         <div class="c-product-quatity">
-                                            <form action="/order?action=editQuantityItem" method="post">
+                                            <form action="/order?action=editQuantityItem&id=${orderItem.id}" method="post">
                                                 <div class="pq-select">
                                                     <input class="pq-changeQuantity" name="sub" value="-" type="submit">
                                                     <input type="text" value="${orderItem.quantity}"
@@ -199,14 +199,13 @@
                                     <fmt:setLocale value="vi_VN"/>
                                             <fmt:formatNumber value="${order.totalPrice}" type="currency"/></span>
                             </div>
-                            <div class="bill-confirm">
-                                <button>TIẾP TỤC</button>
-                            </div>
+                                <div class="bill-confirm">
+                                    <a type="submit" class="btn" href="/order?action=checkout">TIẾP TỤC</a>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div id="footer">

@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mihdu
-  Date: 30/11/2023
-  Time: 7:32 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +14,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<fmt:setLocale value="vi_VN"/>
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
@@ -67,6 +62,8 @@
                 <div class="item"><a href="/admin?action=managerAccount"><i
                         class="fa-solid fa-user-group"></i>Account</a>
                 </div>
+                <div class="item"><a href="/admin?action=managerOrder"><i class="fa-solid fa-list-check"></i>Order</a>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -94,7 +91,8 @@
                                 <th scope="row">${product.id}</th>
                                 <td>${product.name}</td>
                                 <td>${product.brand}</td>
-                                <td>${product.price}</td>
+                                <td>
+                                    <fmt:formatNumber value="${product.price}" type="currency"/></td>
                                 <td>${product.category.name}</td>
                                 <td style="text-align: center">
                                     <a href="/admin?action=editProduct&id=${product.id}"

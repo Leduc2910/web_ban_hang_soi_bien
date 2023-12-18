@@ -84,4 +84,25 @@ public class OrderDetailService implements IOrderDetailService<OrderDetail> {
         }
         return orderDetails;
     }
+
+    public OrderDetail getOrderDetailByID(int id) {
+        String sql = "select orderdetail.* from orderdetail where id = " + id;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idOrder = resultSet.getInt("idOrder");
+                String fullName = resultSet.getString("fullName");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String address = resultSet.getString("address");
+                double totalPrice = resultSet.getDouble("totalPrice");
+                int statusOrder = resultSet.getInt("status");
+                OrderDetail orderDetail = new OrderDetail(id, fullName, phoneNumber, address, totalPrice, statusOrder, idOrder);
+                return orderDetail;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

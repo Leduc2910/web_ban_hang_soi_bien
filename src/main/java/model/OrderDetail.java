@@ -18,7 +18,14 @@ public class OrderDetail {
         this.statusOrder = statusOrder;
         this.idOrder = idOrder;
     }
-
+    public OrderDetail(String fullName, String phoneNumber, String address, double totalPrice, int statusOrder, int idOrder) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.totalPrice = totalPrice;
+        this.statusOrder = statusOrder;
+        this.idOrder = idOrder;
+    }
     public int getId() {
         return id;
     }

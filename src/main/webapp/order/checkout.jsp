@@ -80,7 +80,8 @@
                                 <span>Quản lý đơn hàng</span>
                             </a>
                             <c:if test="${account.role == 1}">
-                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home" style="margin-top: 10px">
+                                <a class="dropdown-item my-dropdown-item fix-dropdown" href="/admin?action=home"
+                                   style="margin-top: 10px">
                                     <i class="fa-solid fa-list-check"></i>
                                     <span>Quản lý</span>
                                 </a>
@@ -96,7 +97,7 @@
                         </div>
                     </div>
                 </c:when>
-                <c:otherwise> <a class="navbar-login" href="/account?action=login">
+                <c:otherwise><a class="navbar-login" href="/account?action=login">
                     <div class="login_icon">
                         <i class="fa-regular fa-circle-user"></i>
                     </div>
@@ -120,52 +121,110 @@
             </a>
         </div>
     </div>
-    <div class="href-product my-row">
-        <a href="/home?action=home">Trang chủ</a> > ${category.name}
-    </div>
     <div class="wrapper my-row">
-        <div class="product-category">
-            <div class="left-side">
-
-            </div>
-            <div class="main-side">
-                <div class="main-option">
-                    <span class="title">Sắp xếp theo</span>
-                    <div class="option">
-                        <a class="btn btn-outline-secondary" href="/product?action=ascending&id=${category.id}">Giá tăng dần</a>
+        <form action="/order?action=checkout" method="post">
+            <div class="wrapper-checkout">
+                <div class="checkout-left">
+                    <div class="checkout-head">
+                        <div class="head-div">
+                            <div class="subtitle">Nhận hàng tại nhà
+                            </div>
+                        </div>
                     </div>
-                    <div class="option">
-                        <a class="btn btn-outline-secondary" href="/product?action=descending&id=${category.id}">Giá giảm dần</a>
+                    <div class="checkout-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <h5>Thông tin đơn hàng</h5>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <c:if test="${error != nul}">
+                                    <span style="color: red">${error}</span>
+                                </c:if>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputFullName"><span style="color: red">*</span><span
+                                        style="font-size: 15px; font-weight: 500;"> Họ tên</span></label>
+                                <input type="text" class="form-control" id="inputFullName" name="fullName"
+                                       placeholder="Vui lòng nhập tên người nhận" value="${account.fullName}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPhone"><span style="color: red">*</span><span
+                                        style="font-size: 15px; font-weight: 500;"> Số điện thoại</span></label>
+                                <input type="text" class="form-control" id="inputPhone" name="phoneNumber"
+                                       placeholder="Nhập số điện thoại" value="${account.phoneNumber}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress"><span style="color: red">*</span><span
+                                    style="font-size: 15px; font-weight: 500;"> Địa chỉ giao hàng</span></label>
+                            <textarea class="form-control" id="inputAddress" name="address"
+                                      style="height: 69px; resize: none"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNote"><span
+                                    style="font-size: 15px; font-weight: 500;">Ghi chú cho đơn hàng</span></label>
+                            <textarea class="form-control" id="inputNote" name="note"
+                                      style="height: 137px; resize: none"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="main-product">
-                    <c:forEach var="product" items="${listProduct}">
-                        <c:if test="${product.category.id == category.id}">
-                            <a href="/product?action=detail&id=${product.id}" class="product">
-                                <img src="${product.image}"
-                                     alt="">
-                                <div class="p-brand">
-                                        ${product.brand}
-                                </div>
-                                <div class="p-name">
-                                        ${product.name}
-                                </div>
-                                <div class="p-unit">
-                                    Đơn vị tính: ${product.unit}
-                                </div>
-                                <div class="p-price">
-                                    <fmt:setLocale value="vi_VN"/>
-                                    <fmt:formatNumber value="${product.price}" type="currency"/>
-                                </div>
-                                <form action="/order?action=addToCart&id=${product.id}" method="post">
-                                    <button class="product-btn" type="submit">Thêm vào giỏ</button>
-                                </form>
-                            </a>
-                        </c:if>
-                    </c:forEach>
+                <div class="checkout-right">
+                    <div class="checkout-product">
+                        <div class="checkout-p-header">
+                            <h5>Thông tin giỏ hàng</h5>
+                            <a href="/order?action=cart">Chỉnh sửa</a>
+                        </div>
+                        <c:forEach items="${lstOrderItem}" var="orderItem">
+                            <c:forEach items="${lstProduct}" var="product">
+                                <c:if test="${orderItem.idProduct == product.id}">
+                                    <div class="product-item">
+                                        <div class="item-img">
+                                            <a href="/product?action=detail&id=${product.id}"><img
+                                                    src="${product.image}"
+                                                    alt=""></a>
+                                        </div>
+                                        <div class="item-info">
+                                            <a href="/product?action=detail&id=${product.id}"
+                                               class="item-name">${product.name}</a>
+                                            <span class="item-quantity">Số lượng ${orderItem.quantity}</span>
+                                            <span class="item-price">
+                                                    <fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber value="${product.price}" type="currency"/></span>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                    </div>
+                    <div class="checkout-bill">
+                        <div class="bill-row">
+                            <span class="bill-left">Tổng tạm tính</span>
+                            <span class="bill-right">
+                                <fmt:setLocale value="vi_VN"/>
+                                <fmt:formatNumber value="${order.totalPrice}" type="currency"/></span>
+                        </div>
+                        <div class="bill-row">
+                            <span class="bill-left">Phí vận chuyển</span>
+                            <span class="bill-right">30.000đ</span>
+                        </div>
+                        <div class="bill-row">
+                            <span class="bill-left">Thành tiền</span>
+                            <span class="bill-right-total"><fmt:setLocale value="vi_VN"/>
+                                            <fmt:formatNumber value="${order.totalPrice+30000}" type="currency"/></span>
+                        </div>
+                        <div class="bill-row">
+                            <span class="bill-left"></span>
+                            <span class="bill-note-right">(Đã bao gồm VAT)</span>
+                        </div>
+                        <div class="bill-button">
+                            <button type="submit">Đặt hàng</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div id="footer">
         <div class="text-left">
@@ -189,7 +248,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-<script src="/javascript/main.js"></script>
+<script src="<c:url value='/javascript/main.js'/>"></script>
 </body>
 </html>
 

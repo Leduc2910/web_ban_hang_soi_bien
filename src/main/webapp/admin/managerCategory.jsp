@@ -67,6 +67,8 @@
                 <div class="item"><a href="/admin?action=managerAccount"><i
                         class="fa-solid fa-user-group"></i>Account</a>
                 </div>
+                <div class="item"><a href="/admin?action=managerOrder"><i class="fa-solid fa-list-check"></i>Order</a>
+                </div>
             </div>
         </div>
         <div class="content">
