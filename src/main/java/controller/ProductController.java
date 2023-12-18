@@ -23,6 +23,7 @@ public class ProductController extends HttpServlet {
     private CategoryService categoryService = new CategoryService();
     private OrderService orderService = new OrderService();
     private OrderItemService orderItemService = new OrderItemService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -41,7 +42,6 @@ public class ProductController extends HttpServlet {
                 break;
         }
     }
-
     private void showAllProductCategoryByDESC(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = SessionUser.getUserSession(req);
         if (account != null) {

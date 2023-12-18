@@ -38,7 +38,6 @@ public class AccountController extends HttpServlet {
                 break;
         }
     }
-
     private void showFormRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (SessionUser.getUserSession(req) == null) {
             List<Category> categoryList = categoryService.findAll();
@@ -124,18 +123,18 @@ public class AccountController extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String password = req.getParameter("password");
         String error = "";
-            if (accountService.checkAccount(phoneNumber, password)) {
-                Account account = accountService.getAccount(phoneNumber, password);
-                HttpSession session = req.getSession();
-                session.setAttribute("account", account);
-                session.setAttribute("role", account.getRole());
-                session.setAttribute("fullName", account.getFullName());
-                resp.sendRedirect("/home?action=home");
-            } else {
-                error = "* Tài khoản hoặc mật khẩu không hợp lệ.";
-                req.setAttribute("error", error);
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
-                requestDispatcher.forward(req, resp);
-            }
+        if (accountService.checkAccount(phoneNumber, password)) {
+            Account account = accountService.getAccount(phoneNumber, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("account", account);
+            session.setAttribute("role", account.getRole());
+            session.setAttribute("fullName", account.getFullName());
+            resp.sendRedirect("/home?action=home");
+        } else {
+            error = "* Tài khoản hoặc mật khẩu không hợp lệ.";
+            req.setAttribute("error", error);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("account/login.jsp");
+            requestDispatcher.forward(req, resp);
+        }
     }
 }
