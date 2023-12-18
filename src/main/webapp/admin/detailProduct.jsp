@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<fmt:setLocale value="vi_VN"/>
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
@@ -59,6 +61,8 @@
                 </div>
                 <div class="item"><a href="/admin?action=managerAccount"><i
                         class="fa-solid fa-user-group"></i>Account</a>
+                </div>
+                <div class="item"><a href="/admin?action=managerOrder"><i class="fa-solid fa-list-check"></i>Order</a>
                 </div>
             </div>
         </div>
@@ -116,7 +120,7 @@
                                     Price:
                                 </label>
                                 <div class="col-sm-9">
-                                    ${product.price}
+                                    <fmt:formatNumber value="${product.price}" type="currency"/>
                                 </div>
                                 <label class="col-sm-3">
                                     Description:

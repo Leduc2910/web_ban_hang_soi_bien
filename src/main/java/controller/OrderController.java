@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import filter.SessionUser;
 import model.*;
 import service.*;
@@ -30,6 +31,34 @@ public class OrderController extends HttpServlet {
             case "cart":
                 showFormCart(req, resp);
                 break;
+            case "checkout":
+                showFormCheckOut(req, resp);
+                break;
+        }
+    }
+
+    private void showFormCheckOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = SessionUser.getUserSession(req);
+        if (account == null) {
+            resp.sendRedirect("account?action=login");
+        } else {
+            Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
+            if (order == null || order.getTotalPrice() == 0) {
+                resp.sendRedirect("/order?action=cart");
+                return;
+            }
+            List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(order.getId());
+            int count = orderItemList.size();
+            List<Category> categoryList = categoryService.findAll();
+            List<Product> productList = productService.findAll();
+            req.setAttribute("account", account);
+            req.setAttribute("order", order);
+            req.setAttribute("listCategory", categoryList);
+            req.setAttribute("lstProduct", productList);
+            req.setAttribute("lstOrderItem", orderItemList);
+            req.setAttribute("count", count);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("order/checkout.jsp");
+            requestDispatcher.forward(req, resp);
         }
     }
 
@@ -42,6 +71,7 @@ public class OrderController extends HttpServlet {
             boolean result = orderService.checkOrder(account.getId());
             Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
             List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(order.getId());
+            int count = orderItemList.size();
             List<Product> productList = new ArrayList<>();
             int totalPrice = 0;
             if (orderItemList.size() != 0) {
@@ -61,6 +91,7 @@ public class OrderController extends HttpServlet {
             req.setAttribute("lstProduct", productList);
             req.setAttribute("lstOrderItem", orderItemList);
             req.setAttribute("order", order);
+            req.setAttribute("count", count);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("order/productCart.jsp");
             requestDispatcher.forward(req, resp);
         }
@@ -82,11 +113,80 @@ public class OrderController extends HttpServlet {
             case "editQuantityItem":
                 editQuantityItem(req, resp);
                 break;
+            case "checkout":
+                checkout(req, resp);
+                break;
         }
     }
 
-    private void editQuantityItem(HttpServletRequest req, HttpServletResponse resp) {
+    private void checkout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String fullName = req.getParameter("fullName");
+        String phoneNumber = req.getParameter("phoneNumber");
+        String address = req.getParameter("address");
+        Account account = SessionUser.getUserSession(req);
+        String error = "";
+        boolean check = true;
+        if (fullName.trim().isEmpty()) {
+            error = "* Vui lòng nhập họ tên.";
+            req.setAttribute("error", error);
+            check = false;
+        } else if (phoneNumber.trim().isEmpty()) {
+            error = "* Vui lòng nhập số điện thoại.";
+            req.setAttribute("error", error);
+            check = false;
+        } else if (address.trim().isEmpty()) {
+            error = "* Vui lòng nhập địa chỉ giao hàng.";
+            req.setAttribute("error", error);
+            check = false;
+        }
+        if (!check) {
+            List<Category> categoryList = categoryService.findAll();
+            Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
+            if (order == null || order.getTotalPrice() == 0) {
+                resp.sendRedirect("/order?action=cart");
+            }
+            List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(order.getId());
+            List<Product> productList = productService.findAll();
+            req.setAttribute("account", account);
+            req.setAttribute("order", order);
+            req.setAttribute("listCategory", categoryList);
+            req.setAttribute("lstProduct", productList);
+            req.setAttribute("lstOrderItem", orderItemList);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("order/checkout.jsp");
+            requestDispatcher.forward(req, resp);
+        } else {
+            Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
+            double totalPrice = order.getTotalPrice() + 30000;
+            OrderDetail orderDetail = new OrderDetail(fullName, phoneNumber, address, totalPrice, 0, order.getId());
+            orderDetailService.add(orderDetail);
+            order.setStatusCart(2);
+            orderService.edit(order.getId(), order);
+            resp.sendRedirect("/home?action=home");
+        }
+    }
 
+    private void editQuantityItem(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        OrderItem orderItem = orderItemService.getOrderItemWithID(id);
+        double price = orderItem.getTotalPrice() / orderItem.getQuantity();
+        String add = req.getParameter("add");
+        String sub = req.getParameter("sub");
+        int quantity = orderItem.getQuantity();
+        if (add != null) {
+            orderItem.setQuantity(++quantity);
+            orderItem.setTotalPrice(price * quantity);
+            orderItemService.edit(id, orderItem);
+        } else if (sub != null) {
+            --quantity;
+            if (quantity == 0) {
+                orderItemService.delete(id);
+            } else {
+                orderItem.setQuantity(quantity);
+                orderItem.setTotalPrice(price * quantity);
+                orderItemService.edit(id, orderItem);
+            }
+        }
+        resp.sendRedirect("/order?action=cart");
     }
 
     private void deleteOrderItem(HttpServletRequest req, HttpServletResponse resp) {

@@ -1,10 +1,10 @@
 package controller;
 
 import filter.SessionUser;
-import model.Account;
-import model.Category;
-import model.Product;
+import model.*;
 import service.CategoryService;
+import service.OrderItemService;
+import service.OrderService;
 import service.ProductService;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +21,8 @@ import java.util.List;
 public class HomeController extends HttpServlet {
     private ProductService productService = new ProductService();
     private CategoryService categoryService = new CategoryService();
+    private OrderService orderService = new OrderService();
+    private OrderItemService orderItemService = new OrderItemService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,6 +38,13 @@ public class HomeController extends HttpServlet {
     }
 
     private void showProductCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = SessionUser.getUserSession(req);
+        if (account != null) {
+            Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
+            List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(order.getId());
+            int count = orderItemList.size();
+            req.setAttribute("count", count);
+        }
         int id = Integer.parseInt(req.getParameter("id"));
         List<Product> productList = new ArrayList<>();
         for (Product p : productService.findAll()) {
@@ -47,31 +56,32 @@ public class HomeController extends HttpServlet {
         req.setAttribute("productCategory", productList);
         List<Category> categoryList = categoryService.findAll();
         req.setAttribute("listCategory", categoryList);
-        Account account = SessionUser.getUserSession(req);
         req.setAttribute("account", account);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/productCategory.jsp");
         requestDispatcher.forward(req, resp);
     }
 
 
-    private void showHomePage(HttpServletRequest req, HttpServletResponse resp) throws
-            ServletException, IOException {
+    private void showHomePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Account account = SessionUser.getUserSession(req);
+        int count = 0;
+        if (account != null) {
+            boolean result = orderService.checkOrder(account.getId());
+            Order order = orderService.getOrderUserOnStatus(account.getId(), 1);
+            List<OrderItem> orderItemList = orderItemService.getOrderItemWithOrderID(order.getId());
+            count = orderItemList.size();
+        }
         List<Product> productList = productService.findAll();
         req.setAttribute("listProduct", productList);
         List<Category> categoryList = categoryService.findAll();
         req.setAttribute("listCategory", categoryList);
-        Account account = SessionUser.getUserSession(req);
         req.setAttribute("account", account);
+        req.setAttribute("count", count);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("home/index.jsp");
         requestDispatcher.forward(req, resp);
     }
-    private void showDetaiProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-    }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

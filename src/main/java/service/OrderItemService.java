@@ -30,7 +30,24 @@ public class OrderItemService implements IOrderItemService<OrderItem> {
         }
         return null;
     }
-
+    public OrderItem getOrderItemWithID(int id) {
+        String sql = "select * from `orderitem` where id = " + id;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idOrder = resultSet.getInt("idOrder");
+                int idProduct = resultSet.getInt("idProduct");
+                int quantity = resultSet.getInt("quantity");
+                double totalPrice = resultSet.getDouble("totalPrice");
+                OrderItem orderItem = new OrderItem(id, idOrder, idProduct, quantity, totalPrice);
+                return orderItem;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
     @Override
     public void add(OrderItem orderItem) {
         String sql = "insert into orderitem(idOrder, idProduct, quantity, totalPrice) values (?,?,?,?)";

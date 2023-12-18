@@ -116,7 +116,7 @@
                 </div>
                 <div class="cart-text">
                     <span style="margin-bottom: 3px">Giỏ hàng của bạn</span>
-                    <span>(0) sản phẩm</span>
+                    <span>(${count}) sản phẩm</span>
                 </div>
             </a>
         </div>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<fmt:setLocale value="vi_VN"/>
 <div class="container-fluid container-fix">
     <div class="header">
         <div class="col-md-6">
@@ -67,55 +69,43 @@
         <div class="content">
             <div class="row row-fix">
                 <div class="col-12">
-                    <h1><span style="font-weight: normal; font-size: smaller">Add</span> Product</h1>
+                    <h1><span style="font-weight: normal; font-size: smaller">List</span> Order</h1>
                     <hr>
                 </div>
                 <div class="col-12 mt-3">
-                    <form action="/admin?action=addProduct" method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-5">
-                                <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" name="name">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputBrand">Brand</label>
-                                <input type="text" class="form-control" id="inputBrand" name="brand">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCategory">Category</label>
-                                <select id="inputCategory" class="form-control" name="idCategory">
-                                    <option selected>Choose...</option>
-                                    <c:forEach var="category" items="${listCategory}">
-                                        <option value="${category.id}">${category.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="inputUnit">Unit</label>
-                                <input type="text" class="form-control" id="inputUnit" name="unit">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputWeight">Weight</label>
-                                <input type="number" id="inputWeight" class="form-control" name="weight">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputPrice">Price</label>
-                                <input type="number" class="form-control" id="inputPrice" name="price">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputDescription">Description</label>
-                            <textarea class="form-control" id="inputDescription" name="description"
-                                      style="height:330px; resize: none"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputImage">Image</label>
-                            <input type="text" class="form-control" id="inputImage" name="image">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <table class="table">
+                        <tr class="navbar-light" style="background-color: #f8f6f8">
+                            <th scope="col">ID</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" colspan="3">Action</th>
+                        </tr>
+                        <c:forEach var="orderDetail" items="${lstOrderDetail}">
+                            <tr>
+                                <th scope="row">${orderDetail.id}</th>
+                                <td>${orderDetail.fullName}</td>
+                                <td>${orderDetail.phoneNumber}</td>
+                                <td>
+                                    <fmt:formatNumber value="${orderDetail.totalPrice}" type="currency"/></td>
+                                <td><c:choose>
+                                    <c:when test="${orderDetail.statusOrder == 0}">Chờ giao hàng</c:when>
+                                    <c:otherwise>Đã hoàn thành</c:otherwise>
+                                </c:choose></td>
+                                <td style="text-align: center">
+                                    <a href="/admin?action=editOrder&id=${orderDetail.id}"
+                                       class="btn btn-outline-warning">Edit</a>
+                                </td>
+                                <td style="text-align: center"><a href="/admin?action=deleteOrder&id=${orderDetail.id}"
+                                                                  class="btn btn-outline-danger">Delete</a>
+                                </td>
+                                <td style="text-align: center"><a href="/admin?action=detailOrder&id=${orderDetail.id}"
+                                                                  class="btn btn-outline-primary">Detail</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
             </div>
         </div>
