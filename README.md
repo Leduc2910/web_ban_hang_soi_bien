@@ -22,7 +22,7 @@ Dự án được xây dựng nhằm mô phỏng các chức năng chính của 
 ## Công nghệ sử dụng
 - **Ngôn ngữ lập trình**: Java  
 - **Framework**: Servlet  
-- **Cơ sở dữ liệu**: (bạn có thể bổ sung MySQL / PostgreSQL nếu có)  
+- **Cơ sở dữ liệu**: MySQL Workbench
 - **Front-end**: HTML, CSS, JavaScript, Bootstrap
 
 
